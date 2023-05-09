@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {
@@ -31,11 +31,11 @@ func main() {
 		pterm.LeveledListItem{Level: 2, Text: "dops"},
 		pterm.LeveledListItem{Level: 2, Text: "PTerm"},
 	}
-
+	
 	// Generate tree from LeveledList.
 	root := putils.TreeFromLeveledList(leveledList)
 	root.Text = "Computer"
-
+	
 	// Render TreePrinter
 	pterm.DefaultTree.WithRoot(root).Render()
 }

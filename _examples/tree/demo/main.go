@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -16,6 +16,6 @@ func main() {
 			},
 		}},
 	}
-
+	
 	pterm.DefaultTree.WithRoot(tree).Render()
 }

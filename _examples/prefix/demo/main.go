@@ -1,11 +1,11 @@
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Enable debug messages.
 	pterm.EnableDebugMessages()
-
+	
 	pterm.Debug.Println("Hello, World!")                                                // Print Debug.
 	pterm.Info.Println("Hello, World!")                                                 // Print Info.
 	pterm.Success.Println("Hello, World!")                                              // Print Success.

@@ -2,7 +2,7 @@ package pterm
 
 import (
 	"encoding/csv"
-	"github.com/pterm/pterm/internal"
+	"github.com/gozelle/pterm/internal"
 	"io"
 	"strings"
 )
@@ -172,9 +172,9 @@ func (p TablePrinter) Srender() (string, error) {
 	if p.RowSeparatorStyle == nil {
 		p.RowSeparatorStyle = NewStyle()
 	}
-
+	
 	var t table
-
+	
 	// convert data to table and calculate values
 	for _, rRaw := range p.Data {
 		var r row
@@ -192,7 +192,7 @@ func (p TablePrinter) Srender() (string, error) {
 				r.height = c.height
 			}
 		}
-
+		
 		// set max column widths of table
 		for i, c := range r.cells {
 			if len(t.maxColumnWidths) <= i {
@@ -201,10 +201,10 @@ func (p TablePrinter) Srender() (string, error) {
 				t.maxColumnWidths[i] = c.width
 			}
 		}
-
+		
 		t.rows = append(t.rows, r)
 	}
-
+	
 	var maxRowWidth int
 	for _, r := range t.rows {
 		rowWidth := internal.GetStringMaxWidth(p.renderRow(t, r))
@@ -212,31 +212,31 @@ func (p TablePrinter) Srender() (string, error) {
 			maxRowWidth = rowWidth
 		}
 	}
-
+	
 	// render table
 	var s string
-
+	
 	for i, r := range t.rows {
 		if i == 0 && p.HasHeader {
 			s += p.HeaderStyle.Sprint(p.renderRow(t, r))
-
+			
 			if p.HeaderRowSeparator != "" {
 				s += strings.Repeat(p.HeaderRowSeparatorStyle.Sprint(p.HeaderRowSeparator), maxRowWidth) + "\n"
 			}
 			continue
 		}
-
+		
 		s += p.renderRow(t, r)
-
+		
 		if p.RowSeparator != "" {
 			s += strings.Repeat(p.RowSeparatorStyle.Sprint(p.RowSeparator), maxRowWidth) + "\n"
 		}
 	}
-
+	
 	if p.Boxed {
 		s = DefaultBox.Sprint(strings.TrimSuffix(s, "\n"))
 	}
-
+	
 	return s, nil
 }
 
@@ -245,7 +245,7 @@ func (p TablePrinter) Srender() (string, error) {
 // Each line of each cell is merged with the same line of the other cells.
 func (p TablePrinter) renderRow(t table, r row) string {
 	var s string
-
+	
 	// merge lines of cells and add separator
 	// use the t.maxColumnWidths to add padding to the corresponding cell
 	// a newline in a cell should be in the same column as the original cell
@@ -256,15 +256,15 @@ func (p TablePrinter) renderRow(t table, r row) string {
 				currentLine = c.lines[i]
 			}
 			paddingForLine := t.maxColumnWidths[j] - internal.GetStringMaxWidth(currentLine)
-
+			
 			if p.RightAlignment {
 				s += strings.Repeat(" ", paddingForLine)
 			}
-
+			
 			if i < len(c.lines) {
 				s += strings.TrimSpace(c.lines[i])
 			}
-
+			
 			if j < len(r.cells)-1 {
 				if p.LeftAlignment {
 					s += strings.Repeat(" ", paddingForLine)
@@ -274,7 +274,7 @@ func (p TablePrinter) renderRow(t table, r row) string {
 		}
 		s += "\n"
 	}
-
+	
 	return s
 }
 
@@ -282,6 +282,6 @@ func (p TablePrinter) renderRow(t table, r row) string {
 func (p TablePrinter) Render() error {
 	s, _ := p.Srender()
 	Fprintln(p.Writer, s)
-
+	
 	return nil
 }

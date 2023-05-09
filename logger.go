@@ -9,8 +9,8 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 type LogLevel int
@@ -34,7 +34,7 @@ func (l LogLevel) Style() Style {
 	case LogLevelPrint:
 		return baseStyle.Add(*FgWhite.ToStyle())
 	}
-
+	
 	return baseStyle.Add(*FgWhite.ToStyle())
 }
 
@@ -206,32 +206,32 @@ func (l Logger) CanPrint(level LogLevel) bool {
 // Args converts any arguments to a slice of LoggerArgument.
 func (l Logger) Args(args ...any) []LoggerArgument {
 	var loggerArgs []LoggerArgument
-
+	
 	// args are in the format of: key, value, key, value, key, value, ...
 	for i := 0; i < len(args); i += 2 {
 		key := Sprint(args[i])
 		value := args[i+1]
-
+		
 		loggerArgs = append(loggerArgs, LoggerArgument{
 			Key:   key,
 			Value: value,
 		})
 	}
-
+	
 	return loggerArgs
 }
 
 // ArgsFromMap converts a map to a slice of LoggerArgument.
 func (l Logger) ArgsFromMap(m map[string]any) []LoggerArgument {
 	var loggerArgs []LoggerArgument
-
+	
 	for k, v := range m {
 		loggerArgs = append(loggerArgs, LoggerArgument{
 			Key:   k,
 			Value: v,
 		})
 	}
-
+	
 	return loggerArgs
 }
 
@@ -239,24 +239,24 @@ func (l Logger) getCallerInfo() (path string, line int) {
 	if !l.ShowCaller {
 		return
 	}
-
+	
 	_, path, line, _ = runtime.Caller(l.CallerOffset + 4)
 	_, callerBase, _, _ := runtime.Caller(0)
 	basepath := filepath.Dir(callerBase)
 	basepath = strings.ReplaceAll(basepath, "\\", "/")
-
+	
 	path = strings.TrimPrefix(path, basepath)
-
+	
 	return
 }
 
 func (l Logger) combineArgs(args ...[]LoggerArgument) []LoggerArgument {
 	var result []LoggerArgument
-
+	
 	for _, arg := range args {
 		result = append(result, arg...)
 	}
-
+	
 	return result
 }
 
@@ -264,19 +264,19 @@ func (l Logger) print(level LogLevel, msg string, args []LoggerArgument) {
 	if l.Level > level {
 		return
 	}
-
+	
 	var line string
-
+	
 	switch l.Formatter {
 	case LogFormatterColorful:
 		line = l.renderColorful(level, msg, args)
 	case LogFormatterJSON:
 		line = l.renderJSON(level, msg, args)
 	}
-
+	
 	loggerMutex.Lock()
 	defer loggerMutex.Unlock()
-
+	
 	_, _ = l.Writer.Write([]byte(line + "\n"))
 }
 
@@ -284,15 +284,15 @@ func (l Logger) renderColorful(level LogLevel, msg string, args []LoggerArgument
 	if l.ShowTime {
 		result += Gray(time.Now().Format(l.TimeFormat)) + " "
 	}
-
+	
 	if GetTerminalWidth() > 0 && GetTerminalWidth() < l.MaxWidth {
 		l.MaxWidth = GetTerminalWidth()
 	}
-
+	
 	var argumentsInNewLine bool
-
+	
 	result += level.Style().Sprintf("%-5s", level.String()) + " "
-
+	
 	// if msg is too long, wrap it to multiple lines with the same length
 	remainingWidth := l.MaxWidth - internal.GetStringMaxWidth(result)
 	if internal.GetStringMaxWidth(msg) > remainingWidth {
@@ -301,9 +301,9 @@ func (l Logger) renderColorful(level LogLevel, msg string, args []LoggerArgument
 		padding := len(time.Now().Format(l.TimeFormat) + " ")
 		msg = strings.ReplaceAll(msg, "\n", "\n"+strings.Repeat(" ", padding)+"  │   ")
 	}
-
+	
 	result += msg
-
+	
 	if l.ShowCaller {
 		path, line := l.getCallerInfo()
 		args = append(args, LoggerArgument{
@@ -311,9 +311,9 @@ func (l Logger) renderColorful(level LogLevel, msg string, args []LoggerArgument
 			Value: FgGray.Sprintf("%s:%d", path, line),
 		})
 	}
-
+	
 	arguments := make([]string, len(args))
-
+	
 	// add arguments
 	if len(args) > 0 {
 		for i, arg := range args {
@@ -322,18 +322,18 @@ func (l Logger) renderColorful(level LogLevel, msg string, args []LoggerArgument
 			} else {
 				arguments[i] = level.Style().Sprintf("%s: ", arg.Key)
 			}
-
+			
 			arguments[i] += Sprintf("%s", Sprint(arg.Value))
 		}
 	}
-
+	
 	fullLine := result + " " + strings.Join(arguments, " ")
-
+	
 	// if the full line is too long, wrap the arguments to multiple lines
 	if internal.GetStringMaxWidth(fullLine) > l.MaxWidth {
 		argumentsInNewLine = true
 	}
-
+	
 	if !argumentsInNewLine {
 		result = fullLine
 	} else {
@@ -341,7 +341,7 @@ func (l Logger) renderColorful(level LogLevel, msg string, args []LoggerArgument
 		if l.ShowTime {
 			padding = len(time.Time{}.Format(l.TimeFormat)) + 3
 		}
-
+		
 		for i, argument := range arguments {
 			var pipe string
 			if i < len(arguments)-1 {
@@ -352,32 +352,32 @@ func (l Logger) renderColorful(level LogLevel, msg string, args []LoggerArgument
 			result += "\n" + strings.Repeat(" ", padding) + pipe + " " + argument
 		}
 	}
-
+	
 	return
 }
 
 func (l Logger) renderJSON(level LogLevel, msg string, args []LoggerArgument) string {
 	m := l.argsToMap(args)
-
+	
 	m["level"] = level.String()
 	m["timestamp"] = time.Now().Format(l.TimeFormat)
 	m["msg"] = msg
-
+	
 	if file, line := l.getCallerInfo(); file != "" {
 		m["caller"] = Sprintf("%s:%d", file, line)
 	}
-
+	
 	b, _ := json.Marshal(m)
 	return string(b)
 }
 
 func (l Logger) argsToMap(args []LoggerArgument) map[string]any {
 	m := make(map[string]any)
-
+	
 	for _, arg := range args {
 		m[arg.Key] = arg.Value
 	}
-
+	
 	return m
 }
 

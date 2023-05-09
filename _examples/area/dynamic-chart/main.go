@@ -2,14 +2,14 @@ package main
 
 import (
 	"time"
-
-	"github.com/pterm/pterm"
+	
+	"github.com/gozelle/pterm"
 )
 
 func main() {
 	area, _ := pterm.DefaultArea.WithFullscreen().WithCenter().Start()
 	defer area.Stop()
-
+	
 	for i := 0; i < 10; i++ {
 		barchart := pterm.DefaultBarChart.WithBars(dynamicBars(i))
 		content, _ := barchart.Srender()

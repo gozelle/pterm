@@ -2,10 +2,10 @@ package pterm
 
 import (
 	"strings"
-
+	
 	"atomicgo.dev/cursor"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 // DefaultArea is the default area printer.
@@ -17,10 +17,10 @@ type AreaPrinter struct {
 	RemoveWhenDone bool
 	Fullscreen     bool
 	Center         bool
-
+	
 	content  string
 	isActive bool
-
+	
 	area *cursor.Area
 }
 
@@ -56,24 +56,24 @@ func (p *AreaPrinter) Update(text ...interface{}) {
 	}
 	str := Sprint(text...)
 	p.content = str
-
+	
 	if p.Center {
 		str = DefaultCenter.Sprint(str)
 	}
-
+	
 	if p.Fullscreen {
 		str = strings.TrimRight(str, "\n")
 		height := GetTerminalHeight()
 		contentHeight := strings.Count(str, "\n")
-
+		
 		topPadding := 0
 		bottomPadding := height - contentHeight - 2
-
+		
 		if p.Center {
 			topPadding = (bottomPadding / 2) + 1
 			bottomPadding /= 2
 		}
-
+		
 		if height > contentHeight {
 			str = strings.Repeat("\n", topPadding) + str
 			str += strings.Repeat("\n", bottomPadding)
@@ -88,9 +88,9 @@ func (p *AreaPrinter) Start(text ...interface{}) (*AreaPrinter, error) {
 	str := Sprint(text...)
 	newArea := cursor.NewArea()
 	p.area = &newArea
-
+	
 	p.Update(str)
-
+	
 	return p, nil
 }
 

@@ -9,7 +9,7 @@
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBox.
@@ -35,7 +35,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBox.Println("Hello, World!")
@@ -56,7 +56,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.Info.Println("This might not be rendered correctly on GitHub,\nbut it will work in a real terminal.\nThis is because GitHub does not use a monospaced font by default for SVGs")
@@ -88,7 +88,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Default titled bpx

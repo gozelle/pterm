@@ -2,8 +2,8 @@ package putils
 
 import (
 	"reflect"
-
-	"github.com/pterm/pterm"
+	
+	"github.com/gozelle/pterm"
 )
 
 // TableFromStructSlice accepts a customized table printer and and a slice of a struct.
@@ -16,30 +16,30 @@ func TableFromStructSlice(tablePrinter pterm.TablePrinter, structSlice interface
 		return &tablePrinter
 	}
 	el := to.Elem()
-
+	
 	isPointer := false
 	if el.Kind() == reflect.Ptr {
 		el = el.Elem()
 		isPointer = true
 	}
-
+	
 	if el.Kind() != reflect.Struct {
 		return &tablePrinter
 	}
-
+	
 	numFields := el.NumField()
 	fieldNames := make([]string, numFields)
-
+	
 	for i := 0; i < numFields; i++ {
 		fieldNames[i] = el.Field(i).Name
 	}
-
+	
 	records := pterm.TableData{
 		fieldNames,
 	}
-
+	
 	obj := reflect.ValueOf(structSlice)
-
+	
 	items := make([]interface{}, obj.Len())
 	for i := 0; i < obj.Len(); i++ {
 		if isPointer {
@@ -48,7 +48,7 @@ func TableFromStructSlice(tablePrinter pterm.TablePrinter, structSlice interface
 			items[i] = obj.Index(i).Interface()
 		}
 	}
-
+	
 	for _, v := range items {
 		item := reflect.ValueOf(v)
 		record := make([]string, numFields)
@@ -59,7 +59,7 @@ func TableFromStructSlice(tablePrinter pterm.TablePrinter, structSlice interface
 		records = append(records, record)
 	}
 	tablePrinter.Data = records
-
+	
 	return &tablePrinter
 }
 

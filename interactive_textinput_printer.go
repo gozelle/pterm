@@ -2,12 +2,12 @@ package pterm
 
 import (
 	"strings"
-
+	
 	"atomicgo.dev/cursor"
 	"atomicgo.dev/keyboard"
 	"atomicgo.dev/keyboard/keys"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 var (
@@ -25,7 +25,7 @@ type InteractiveTextInputPrinter struct {
 	DefaultText string
 	MultiLine   bool
 	Mask        string
-
+	
 	input      []string
 	cursorXPos int
 	cursorYPos int
@@ -62,13 +62,13 @@ func (p InteractiveTextInputPrinter) Show(text ...string) (string, error) {
 	// and all the needed cleanup can be done before
 	cancel, exit := internal.NewCancelationSignal()
 	defer exit()
-
+	
 	var areaText string
-
+	
 	if len(text) == 0 || Sprint(text[0]) == "" {
 		text = []string{p.DefaultText}
 	}
-
+	
 	if p.MultiLine {
 		areaText = p.TextStyle.Sprintfln("%s %s :", text[0], ThemeDefault.SecondaryStyle.Sprint("[Press tab to submit]"))
 	} else {
@@ -80,13 +80,13 @@ func (p InteractiveTextInputPrinter) Show(text ...string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
+	
 	cursor.Up(1)
 	cursor.StartOfLine()
 	if !p.MultiLine {
 		cursor.Right(len(RemoveColorFromString(areaText)))
 	}
-
+	
 	err = keyboard.Listen(func(key keys.Key) (stop bool, err error) {
 		if !p.MultiLine {
 			p.cursorYPos = 0
@@ -94,7 +94,7 @@ func (p InteractiveTextInputPrinter) Show(text ...string) (string, error) {
 		if len(p.input) == 0 {
 			p.input = append(p.input, "")
 		}
-
+		
 		switch key.Code {
 		case keys.Tab:
 			if p.MultiLine {
@@ -161,7 +161,7 @@ func (p InteractiveTextInputPrinter) Show(text ...string) (string, error) {
 				p.cursorYPos--
 			}
 		}
-
+		
 		if internal.GetStringMaxWidth(p.input[p.cursorYPos]) > 0 {
 			switch key.Code {
 			case keys.Right:
@@ -180,18 +180,18 @@ func (p InteractiveTextInputPrinter) Show(text ...string) (string, error) {
 				}
 			}
 		}
-
+		
 		p.updateArea(area)
-
+		
 		return false, nil
 	})
 	if err != nil {
 		return "", err
 	}
-
+	
 	// Add new line
 	Println()
-
+	
 	for i, s := range p.input {
 		if i < len(p.input)-1 {
 			areaText += s + "\n"
@@ -199,7 +199,7 @@ func (p InteractiveTextInputPrinter) Show(text ...string) (string, error) {
 			areaText += s
 		}
 	}
-
+	
 	return strings.ReplaceAll(areaText, p.text, ""), nil
 }
 
@@ -208,7 +208,7 @@ func (p InteractiveTextInputPrinter) updateArea(area *AreaPrinter) string {
 		p.cursorYPos = 0
 	}
 	areaText := p.text
-
+	
 	for i, s := range p.input {
 		if i < len(p.input)-1 {
 			areaText += s + "\n"
@@ -216,15 +216,15 @@ func (p InteractiveTextInputPrinter) updateArea(area *AreaPrinter) string {
 			areaText += s
 		}
 	}
-
+	
 	if p.Mask != "" {
 		areaText = p.text + strings.Repeat(p.Mask, internal.GetStringMaxWidth(areaText)-internal.GetStringMaxWidth(p.text))
 	}
-
+	
 	if p.cursorXPos+internal.GetStringMaxWidth(p.input[p.cursorYPos]) < 1 {
 		p.cursorXPos = -internal.GetStringMaxWidth(p.input[p.cursorYPos])
 	}
-
+	
 	cursor.StartOfLine()
 	area.Update(areaText)
 	cursor.Up(len(p.input) - p.cursorYPos)

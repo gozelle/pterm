@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
+	
 	"github.com/gookit/color"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 // ActiveProgressBarPrinters contains all running ProgressbarPrinters.
@@ -43,20 +43,20 @@ type ProgressbarPrinter struct {
 	ElapsedTimeRoundingFactor time.Duration
 	BarFiller                 string
 	MaxWidth                  int
-
+	
 	ShowElapsedTime bool
 	ShowCount       bool
 	ShowTitle       bool
 	ShowPercentage  bool
 	RemoveWhenDone  bool
-
+	
 	TitleStyle *Style
 	BarStyle   *Style
-
+	
 	IsActive bool
-
+	
 	startedAt time.Time
-
+	
 	Writer io.Writer
 }
 
@@ -182,11 +182,11 @@ func (p *ProgressbarPrinter) updateProgress() *ProgressbarPrinter {
 	if p.Total == 0 {
 		return nil
 	}
-
+	
 	var before string
 	var after string
 	var width int
-
+	
 	if p.MaxWidth <= 0 {
 		width = GetTerminalWidth()
 	} else if GetTerminalWidth() < p.MaxWidth {
@@ -194,47 +194,47 @@ func (p *ProgressbarPrinter) updateProgress() *ProgressbarPrinter {
 	} else {
 		width = p.MaxWidth
 	}
-
+	
 	currentPercentage := int(internal.PercentageRound(float64(int64(p.Total)), float64(int64(p.Current))))
-
+	
 	decoratorCount := Gray("[") + LightWhite(p.Current) + Gray("/") + LightWhite(p.Total) + Gray("]")
-
+	
 	decoratorCurrentPercentage := color.RGB(NewRGB(255, 0, 0).Fade(0, float32(p.Total), float32(p.Current), NewRGB(0, 255, 0)).GetValues()).
 		Sprint(strconv.Itoa(currentPercentage) + "%")
-
+	
 	decoratorTitle := p.TitleStyle.Sprint(p.Title)
-
+	
 	if p.ShowTitle {
 		before += decoratorTitle + " "
 	}
 	if p.ShowCount {
 		before += decoratorCount + " "
 	}
-
+	
 	after += " "
-
+	
 	if p.ShowPercentage {
 		after += decoratorCurrentPercentage + " "
 	}
 	if p.ShowElapsedTime {
 		after += "| " + p.parseElapsedTime()
 	}
-
+	
 	barMaxLength := width - len(RemoveColorFromString(before)) - len(RemoveColorFromString(after)) - 1
-
+	
 	barCurrentLength := (p.Current * barMaxLength) / p.Total
 	var barFiller string
 	if barMaxLength-barCurrentLength > 0 {
 		barFiller = strings.Repeat(p.BarFiller, barMaxLength-barCurrentLength)
 	}
-
+	
 	var bar string
 	if barCurrentLength > 0 {
 		bar = p.BarStyle.Sprint(strings.Repeat(p.BarCharacter, barCurrentLength)+p.LastCharacter) + barFiller
 	} else {
 		bar = ""
 	}
-
+	
 	if !RawOutput {
 		Fprinto(p.Writer, before+bar+after)
 	}
@@ -246,10 +246,10 @@ func (p *ProgressbarPrinter) Add(count int) *ProgressbarPrinter {
 	if p.Total == 0 {
 		return nil
 	}
-
+	
 	p.Current += count
 	p.updateProgress()
-
+	
 	if p.Current >= p.Total {
 		p.Stop()
 	}
@@ -267,9 +267,9 @@ func (p ProgressbarPrinter) Start(title ...interface{}) (*ProgressbarPrinter, er
 	}
 	ActiveProgressBarPrinters = append(ActiveProgressBarPrinters, &p)
 	p.startedAt = time.Now()
-
+	
 	p.updateProgress()
-
+	
 	return &p, nil
 }
 

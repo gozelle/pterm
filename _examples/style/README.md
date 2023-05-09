@@ -9,7 +9,7 @@
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create styles as new variables

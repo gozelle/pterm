@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"io"
 	"strings"
-
+	
 	"github.com/mattn/go-runewidth"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 var (
@@ -67,21 +67,21 @@ func (p HeaderPrinter) Sprint(a ...interface{}) string {
 	if RawOutput {
 		return Sprint(a...)
 	}
-
+	
 	if p.TextStyle == nil {
 		p.TextStyle = NewStyle()
 	}
 	if p.BackgroundStyle == nil {
 		p.BackgroundStyle = NewStyle()
 	}
-
+	
 	text := Sprint(a...)
-
+	
 	var blankLine string
-
+	
 	longestLine := internal.ReturnLongestLine(text, "\n")
 	longestLineLen := runewidth.StringWidth(RemoveColorFromString(longestLine)) + p.Margin*2
-
+	
 	if p.FullWidth {
 		text = splitText(text, GetTerminalWidth()-p.Margin*2)
 		blankLine = strings.Repeat(" ", GetTerminalWidth())
@@ -94,17 +94,17 @@ func (p HeaderPrinter) Sprint(a ...interface{}) string {
 			blankLine = strings.Repeat(" ", longestLineLen)
 		}
 	}
-
+	
 	var marginString string
 	var ret string
-
+	
 	if p.FullWidth {
 		longestLineLen = runewidth.StringWidth(RemoveColorFromString(internal.ReturnLongestLine(text, "\n")))
 		marginString = strings.Repeat(" ", (GetTerminalWidth()-longestLineLen)/2)
 	} else {
 		marginString = strings.Repeat(" ", p.Margin)
 	}
-
+	
 	ret += p.BackgroundStyle.Sprint(blankLine) + "\n"
 	for _, line := range strings.Split(text, "\n") {
 		line = strings.ReplaceAll(line, "\n", "")
@@ -115,7 +115,7 @@ func (p HeaderPrinter) Sprint(a ...interface{}) string {
 		ret += p.BackgroundStyle.Sprint(p.TextStyle.Sprint(line)) + "\n"
 	}
 	ret += p.BackgroundStyle.Sprint(blankLine) + "\n"
-
+	
 	return ret
 }
 
@@ -142,12 +142,12 @@ func splitText(text string, width int) string {
 			lines = append(lines, line)
 		}
 	}
-
+	
 	var line string
 	for _, s := range lines {
 		line += s
 	}
-
+	
 	return strings.TrimSuffix(line, "\n")
 }
 
@@ -214,7 +214,7 @@ func (p *HeaderPrinter) PrintOnError(a ...interface{}) *TextPrinter {
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }
@@ -230,7 +230,7 @@ func (p *HeaderPrinter) PrintOnErrorf(format string, a ...interface{}) *TextPrin
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }

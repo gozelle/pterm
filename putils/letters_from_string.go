@@ -2,8 +2,8 @@ package putils
 
 import (
 	"strings"
-
-	"github.com/pterm/pterm"
+	
+	"github.com/gozelle/pterm"
 )
 
 // LettersFromString creates a Letters object from a string, which is prefilled with the LetterStyle from ThemeDefault.
@@ -16,14 +16,14 @@ func LettersFromString(text string) pterm.Letters {
 func LettersFromStringWithStyle(text string, style *pterm.Style) pterm.Letters {
 	s := strings.Split(text, "")
 	l := pterm.Letters{}
-
+	
 	for _, s2 := range s {
 		l = append(l, pterm.Letter{
 			String: s2,
 			Style:  style,
 		})
 	}
-
+	
 	return l
 }
 
@@ -31,7 +31,7 @@ func LettersFromStringWithStyle(text string, style *pterm.Style) pterm.Letters {
 func LettersFromStringWithRGB(text string, rgb pterm.RGB) pterm.Letters {
 	s := strings.Split(text, "")
 	l := pterm.Letters{}
-
+	
 	for _, s2 := range s {
 		l = append(l, pterm.Letter{
 			String: s2,
@@ -39,6 +39,6 @@ func LettersFromStringWithRGB(text string, rgb pterm.RGB) pterm.Letters {
 			RGB:    rgb,
 		})
 	}
-
+	
 	return l
 }

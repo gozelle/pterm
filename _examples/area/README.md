@@ -12,7 +12,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -44,7 +44,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -76,7 +76,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -110,7 +110,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -152,7 +152,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -184,7 +184,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {

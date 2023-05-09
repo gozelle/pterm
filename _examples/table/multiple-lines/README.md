@@ -5,7 +5,7 @@
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a table with multiple lines in a row and set a row separator.

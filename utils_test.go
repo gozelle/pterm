@@ -6,9 +6,9 @@ import (
 	"io"
 	"os"
 	"testing"
-
+	
 	"github.com/MarvinJWendt/testza"
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 var printables = []interface{}{"Hello, World!", 1337, true, false, -1337, 'c', 1.5, "\\", "%s"}

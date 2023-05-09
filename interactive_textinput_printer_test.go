@@ -2,12 +2,12 @@ package pterm_test
 
 import (
 	"testing"
-
+	
 	"atomicgo.dev/keyboard"
 	"atomicgo.dev/keyboard/keys"
 	"github.com/MarvinJWendt/testza"
-
-	"github.com/pterm/pterm"
+	
+	"github.com/gozelle/pterm"
 )
 
 func TestInteractiveTextInputPrinter_WithDefaultText(t *testing.T) {

@@ -1,6 +1,6 @@
 package putils
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 // RunWithSpinner starts a spinner, then runs a function and after the function is done, the spinner will stop again.
 func RunWithSpinner(spinner *pterm.SpinnerPrinter, f func(spinner *pterm.SpinnerPrinter) error) error {
@@ -8,13 +8,13 @@ func RunWithSpinner(spinner *pterm.SpinnerPrinter, f func(spinner *pterm.Spinner
 	if err != nil {
 		return err
 	}
-
+	
 	err = f(s)
-
+	
 	if s.IsActive {
 		s.Stop()
 	}
-
+	
 	return err
 }
 

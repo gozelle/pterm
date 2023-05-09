@@ -9,7 +9,7 @@
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -40,7 +40,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -71,7 +71,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -103,7 +103,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -142,7 +142,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -173,7 +173,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -205,7 +205,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -253,7 +253,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -292,7 +292,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{

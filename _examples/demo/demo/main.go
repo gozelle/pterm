@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 // Speed the demo up, by setting this flag.
@@ -26,21 +26,21 @@ var pseudoProgramList = strings.Split("pseudo-excel pseudo-photoshop pseudo-chro
 
 func main() {
 	setup() // Setup the demo (flags etc.)
-
+	
 	// Show intro
 	if !*skipIntro {
 		introScreen()
 		clear()
 	}
-
+	
 	showcase("Structured Logging", 5, func() {
 		logger := pterm.DefaultLogger.
 			WithLevel(pterm.LogLevelTrace)
-
+		
 		logger.Trace("Doing not so important stuff", logger.Args("priority", "super low"))
-
+		
 		time.Sleep(time.Second * 3)
-
+		
 		interstingStuff := map[string]any{
 			"when were crayons invented":  "1903",
 			"what is the meaning of life": 42,
@@ -48,7 +48,7 @@ func main() {
 		}
 		logger.Debug("This might be interesting", logger.ArgsFromMap(interstingStuff))
 		time.Sleep(time.Second * 3)
-
+		
 		logger.Info("That was actually interesting", logger.Args("such", "wow"))
 		time.Sleep(time.Second * 3)
 		logger.Warn("Oh no, I see an error coming to us!", logger.Args("speed", 88, "measures", "mph"))
@@ -57,7 +57,7 @@ func main() {
 		time.Sleep(time.Second * 3)
 		logger.Info("But what's really cool is, that you can print very long logs, and PTerm will automatically wrap them for you! Say goodbye to text, that has weird line breaks!", logger.Args("very", "long"))
 	})
-
+	
 	showcase("Progress bar", 2, func() {
 		pb, _ := pterm.DefaultProgressbar.WithTotal(len(pseudoProgramList)).WithTitle("Installing stuff").Start()
 		for i := 0; i < pb.Total; i++ {
@@ -72,7 +72,7 @@ func main() {
 		}
 		pb.Stop()
 	})
-
+	
 	showcase("Spinner", 2, func() {
 		list := pseudoProgramList[7:]
 		spinner, _ := pterm.DefaultSpinner.Start("Installing stuff")
@@ -87,7 +87,7 @@ func main() {
 		}
 		spinner.Success()
 	})
-
+	
 	showcase("Live Output", 2, func() {
 		pterm.Info.Println("You can use an Area to display changing output:")
 		pterm.Println()
@@ -99,7 +99,7 @@ func main() {
 		}
 		area.Stop()
 	})
-
+	
 	showcase("Tables", 4, func() {
 		for i := 0; i < 3; i++ {
 			pterm.Println()
@@ -115,11 +115,11 @@ func main() {
 		pterm.DefaultCenter.Println(table)
 		pterm.DefaultCenter.Println(boxedTable)
 	})
-
+	
 	showcase("TrueColor Support", 7, func() {
 		from := pterm.NewRGB(0, 255, 255) // This RGB value is used as the gradients start point.
 		to := pterm.NewRGB(255, 0, 255)   // This RGB value is used as the gradients first point.
-
+		
 		str := "If your terminal has TrueColor support, you can use RGB colors!\nYou can even fade them :)\n\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 		strs := strings.Split(str, "")
 		var fadeInfo string // String which will be used to print info.
@@ -130,7 +130,7 @@ func main() {
 		}
 		pterm.DefaultCenter.WithCenterEachLineSeparately().Println(fadeInfo)
 	})
-
+	
 	showcase("Fully Customizale", 2, func() {
 		for i := 0; i < 4; i++ {
 			pterm.Println()
@@ -178,14 +178,14 @@ func main() {
 			Sprintln(text))
 		area.Stop()
 	})
-
+	
 	showcase("Themes", 2, func() {
 		pterm.Info.Println("You can change the color theme of PTerm easily to fit your needs!\nThis is the default one:")
 		time.Sleep(second / 2)
 		// Print every value of the default theme with its own style.
 		v := reflect.ValueOf(pterm.ThemeDefault)
 		typeOfS := v.Type()
-
+		
 		if typeOfS == reflect.TypeOf(pterm.Theme{}) {
 			for i := 0; i < v.NumField(); i++ {
 				field, ok := v.Field(i).Interface().(pterm.Style)
@@ -196,7 +196,7 @@ func main() {
 			}
 		}
 	})
-
+	
 	showcase("And much more!", 3, func() {
 		for i := 0; i < 4; i++ {
 			pterm.Println()
@@ -223,11 +223,11 @@ func introScreen() {
 		putils.LettersFromStringWithStyle("P", pterm.NewStyle(pterm.FgLightCyan)),
 		putils.LettersFromStringWithStyle("Term", pterm.NewStyle(pterm.FgLightMagenta))).
 		Srender()
-
+	
 	pterm.DefaultCenter.Print(ptermLogo)
-
+	
 	pterm.DefaultCenter.Print(pterm.DefaultHeader.WithFullWidth().WithBackgroundStyle(pterm.NewStyle(pterm.BgLightBlue)).WithMargin(10).Sprint("PTDP - PTerm Demo Program"))
-
+	
 	pterm.Info.Println("This animation was generated with the latest version of PTerm!" +
 		"\nPTerm works on nearly every terminal and operating system." +
 		"\nIt's super easy to use!" +

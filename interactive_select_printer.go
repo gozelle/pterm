@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"math"
 	"sort"
-
+	
 	"atomicgo.dev/cursor"
 	"atomicgo.dev/keyboard"
 	"atomicgo.dev/keyboard/keys"
+	"github.com/gozelle/pterm/internal"
 	"github.com/lithammer/fuzzysearch/fuzzy"
-	"github.com/pterm/pterm/internal"
 )
 
 var (
@@ -36,7 +36,7 @@ type InteractiveSelectPrinter struct {
 	MaxHeight     int
 	Selector      string
 	SelectorStyle *Style
-
+	
 	selectedOption        int
 	result                string
 	text                  string
@@ -77,31 +77,31 @@ func (p *InteractiveSelectPrinter) Show(text ...string) (string, error) {
 	// and all the needed cleanup can be done before
 	cancel, exit := internal.NewCancelationSignal()
 	defer exit()
-
+	
 	if len(text) == 0 || Sprint(text[0]) == "" {
 		text = []string{p.DefaultText}
 	}
-
+	
 	p.text = p.TextStyle.Sprint(text[0])
 	p.fuzzySearchMatches = append([]string{}, p.Options...)
-
+	
 	if p.MaxHeight == 0 {
 		p.MaxHeight = DefaultInteractiveSelect.MaxHeight
 	}
-
+	
 	maxHeight := p.MaxHeight
 	if maxHeight > len(p.fuzzySearchMatches) {
 		maxHeight = len(p.fuzzySearchMatches)
 	}
-
+	
 	if len(p.Options) == 0 {
 		return "", fmt.Errorf("no options provided")
 	}
-
+	
 	p.displayedOptions = append([]string{}, p.fuzzySearchMatches[:maxHeight]...)
 	p.displayedOptionsStart = 0
 	p.displayedOptionsEnd = maxHeight
-
+	
 	// Get index of default option
 	if p.DefaultOption != "" {
 		for i, option := range p.Options {
@@ -119,27 +119,27 @@ func (p *InteractiveSelectPrinter) Show(text ...string) (string, error) {
 			}
 		}
 	}
-
+	
 	area, err := DefaultArea.Start(p.renderSelectMenu())
 	defer area.Stop()
 	if err != nil {
 		return "", fmt.Errorf("could not start area: %w", err)
 	}
-
+	
 	area.Update(p.renderSelectMenu())
-
+	
 	cursor.Hide()
 	defer cursor.Show()
-
+	
 	err = keyboard.Listen(func(keyInfo keys.Key) (stop bool, err error) {
 		key := keyInfo.Code
-
+		
 		if p.MaxHeight > len(p.fuzzySearchMatches) {
 			maxHeight = len(p.fuzzySearchMatches)
 		} else {
 			maxHeight = p.MaxHeight
 		}
-
+		
 		switch key {
 		case keys.RuneKey:
 			// Fuzzy search for options
@@ -160,24 +160,24 @@ func (p *InteractiveSelectPrinter) Show(text ...string) (string, error) {
 				// Handle UTF-8 characters
 				p.fuzzySearchString = string([]rune(p.fuzzySearchString)[:len([]rune(p.fuzzySearchString))-1])
 			}
-
+			
 			if p.fuzzySearchString == "" {
 				p.fuzzySearchMatches = append([]string{}, p.Options...)
 			}
-
+			
 			p.renderSelectMenu()
-
+			
 			if len(p.fuzzySearchMatches) > p.MaxHeight {
 				maxHeight = p.MaxHeight
 			} else {
 				maxHeight = len(p.fuzzySearchMatches)
 			}
-
+			
 			p.selectedOption = 0
 			p.displayedOptionsStart = 0
 			p.displayedOptionsEnd = maxHeight
 			p.displayedOptions = append([]string{}, p.fuzzySearchMatches[p.displayedOptionsStart:p.displayedOptionsEnd]...)
-
+			
 			area.Update(p.renderSelectMenu())
 		case keys.Up:
 			if len(p.fuzzySearchMatches) == 0 {
@@ -200,7 +200,7 @@ func (p *InteractiveSelectPrinter) Show(text ...string) (string, error) {
 				p.displayedOptionsEnd = len(p.fuzzySearchMatches)
 				p.displayedOptions = append([]string{}, p.fuzzySearchMatches[p.displayedOptionsStart:p.displayedOptionsEnd]...)
 			}
-
+			
 			area.Update(p.renderSelectMenu())
 		case keys.Down:
 			if len(p.fuzzySearchMatches) == 0 {
@@ -220,7 +220,7 @@ func (p *InteractiveSelectPrinter) Show(text ...string) (string, error) {
 				p.displayedOptionsEnd = maxHeight
 				p.displayedOptions = append([]string{}, p.fuzzySearchMatches[p.displayedOptionsStart:p.displayedOptionsEnd]...)
 			}
-
+			
 			area.Update(p.renderSelectMenu())
 		case keys.CtrlC:
 			cancel()
@@ -232,21 +232,21 @@ func (p *InteractiveSelectPrinter) Show(text ...string) (string, error) {
 			area.Update(p.renderFinishedMenu())
 			return true, nil
 		}
-
+		
 		return false, nil
 	})
 	if err != nil {
 		Error.Println(err)
 		return "", fmt.Errorf("failed to start keyboard listener: %w", err)
 	}
-
+	
 	return p.result, nil
 }
 
 func (p *InteractiveSelectPrinter) renderSelectMenu() string {
 	var content string
 	content += Sprintf("%s %s: %s\n", p.text, p.SelectorStyle.Sprint("[type to search]"), p.fuzzySearchString)
-
+	
 	// find options that match fuzzy search string
 	rankedResults := fuzzy.RankFindFold(p.fuzzySearchString, p.Options)
 	// map rankedResults to fuzzySearchMatches
@@ -257,11 +257,11 @@ func (p *InteractiveSelectPrinter) renderSelectMenu() string {
 	for _, result := range rankedResults {
 		p.fuzzySearchMatches = append(p.fuzzySearchMatches, result.Target)
 	}
-
+	
 	if len(p.fuzzySearchMatches) != 0 {
 		p.result = p.fuzzySearchMatches[p.selectedOption]
 	}
-
+	
 	indexMapper := make([]string, len(p.fuzzySearchMatches))
 	for i := 0; i < len(p.fuzzySearchMatches); i++ {
 		// if in displayed options range
@@ -269,7 +269,7 @@ func (p *InteractiveSelectPrinter) renderSelectMenu() string {
 			indexMapper[i] = p.fuzzySearchMatches[i]
 		}
 	}
-
+	
 	for i, option := range indexMapper {
 		if option == "" {
 			continue
@@ -280,7 +280,7 @@ func (p *InteractiveSelectPrinter) renderSelectMenu() string {
 			content += Sprintf("  %s\n", p.OptionStyle.Sprint(option))
 		}
 	}
-
+	
 	return content
 }
 
@@ -288,7 +288,7 @@ func (p InteractiveSelectPrinter) renderFinishedMenu() string {
 	var content string
 	content += Sprintf("%s: %s\n", p.text, p.fuzzySearchString)
 	content += Sprintf("  %s %s\n", p.renderSelector(), p.result)
-
+	
 	return content
 }
 

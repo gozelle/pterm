@@ -1,14 +1,14 @@
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	logger := pterm.DefaultLogger.
 		WithLevel(pterm.LogLevelTrace). // Only show logs with a level of Trace or higher.
-		WithCaller()                    // ! Show the caller of the log function.
-
+		WithCaller() // ! Show the caller of the log function.
+	
 	logger.Trace("Doing not so important stuff", logger.Args("priority", "super low"))
-
+	
 	// You can also use the `ArgsFromMap` function to create a `Args` object from a map.
 	interstingStuff := map[string]any{
 		"when were crayons invented":  "1903",
@@ -16,7 +16,7 @@ func main() {
 		"is this interesting":         true,
 	}
 	logger.Debug("This might be interesting", logger.ArgsFromMap(interstingStuff))
-
+	
 	logger.Info("That was actually interesting", logger.Args("such", "wow"))
 	logger.Warn("Oh no, I see an error coming to us!", logger.Args("speed", 88, "measures", "mph"))
 	logger.Error("Damn, here it is!", logger.Args("error", "something went wrong"))

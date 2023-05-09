@@ -9,7 +9,7 @@
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a fork of the default table, fill it with data and print it.
@@ -38,7 +38,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a fork of the default table, fill it with data and print it.
@@ -78,7 +78,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a table with multiple lines in a row and set a row separator.
@@ -106,7 +106,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a fork of the default table, fill it with data and print it.

@@ -5,8 +5,8 @@ import (
 	"io"
 	"runtime"
 	"strings"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 var (
@@ -23,7 +23,7 @@ var (
 			Text:  "INFO",
 		},
 	}
-
+	
 	// Warning returns a PrefixPrinter, which can be used to print text with a "warning" Prefix.
 	Warning = PrefixPrinter{
 		MessageStyle: &ThemeDefault.WarningMessageStyle,
@@ -32,7 +32,7 @@ var (
 			Text:  "WARNING",
 		},
 	}
-
+	
 	// Success returns a PrefixPrinter, which can be used to print text with a "success" Prefix.
 	Success = PrefixPrinter{
 		MessageStyle: &ThemeDefault.SuccessMessageStyle,
@@ -41,7 +41,7 @@ var (
 			Text:  "SUCCESS",
 		},
 	}
-
+	
 	// Error returns a PrefixPrinter, which can be used to print text with an "error" Prefix.
 	Error = PrefixPrinter{
 		MessageStyle: &ThemeDefault.ErrorMessageStyle,
@@ -50,7 +50,7 @@ var (
 			Text:  " ERROR ",
 		},
 	}
-
+	
 	// Fatal returns a PrefixPrinter, which can be used to print text with an "fatal" Prefix.
 	// NOTICE: Fatal terminates the application immediately!
 	Fatal = PrefixPrinter{
@@ -61,7 +61,7 @@ var (
 		},
 		Fatal: true,
 	}
-
+	
 	// Debug Prints debug messages. By default it will only print if PrintDebugMessages is true.
 	// You can change PrintDebugMessages with EnableDebugMessages and DisableDebugMessages, or by setting the variable itself.
 	Debug = PrefixPrinter{
@@ -72,7 +72,7 @@ var (
 		},
 		Debugger: true,
 	}
-
+	
 	// Description returns a PrefixPrinter, which can be used to print text with a "description" Prefix.
 	Description = PrefixPrinter{
 		MessageStyle: &ThemeDefault.DescriptionMessageStyle,
@@ -159,7 +159,7 @@ func (p *PrefixPrinter) Sprint(a ...interface{}) string {
 	if p.Debugger && !PrintDebugMessages {
 		return ""
 	}
-
+	
 	if RawOutput {
 		if p.Prefix.Text != "" {
 			return Sprintf("%s: %s", strings.TrimSpace(p.Prefix.Text), Sprint(a...))
@@ -167,7 +167,7 @@ func (p *PrefixPrinter) Sprint(a ...interface{}) string {
 			return Sprint(a...)
 		}
 	}
-
+	
 	if p.Prefix.Style == nil {
 		p.Prefix.Style = NewStyle()
 	}
@@ -177,15 +177,15 @@ func (p *PrefixPrinter) Sprint(a ...interface{}) string {
 	if p.MessageStyle == nil {
 		p.MessageStyle = NewStyle()
 	}
-
+	
 	var ret string
 	var newLine bool
-
+	
 	if strings.HasSuffix(m, "\n") {
 		m = strings.TrimRight(m, "\n")
 		newLine = true
 	}
-
+	
 	messageLines := strings.Split(m, "\n")
 	for i, m := range messageLines {
 		if i == 0 {
@@ -198,17 +198,17 @@ func (p *PrefixPrinter) Sprint(a ...interface{}) string {
 			ret += "\n" + p.Prefix.Style.Sprint(strings.Repeat(" ", len(p.Prefix.Text)+2)) + " " + p.MessageStyle.Sprint(m)
 		}
 	}
-
+	
 	if p.ShowLineNumber {
 		_, fileName, line, _ := runtime.Caller(3 + p.LineNumberOffset)
 		ret += FgGray.Sprint("\n└ " + fmt.Sprintf("(%s:%d)\n", fileName, line))
 		newLine = false
 	}
-
+	
 	if newLine {
 		ret += "\n"
 	}
-
+	
 	return Sprint(ret)
 }
 
@@ -307,7 +307,7 @@ func (p *PrefixPrinter) PrintOnError(a ...interface{}) *TextPrinter {
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }
@@ -323,7 +323,7 @@ func (p *PrefixPrinter) PrintOnErrorf(format string, a ...interface{}) *TextPrin
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }

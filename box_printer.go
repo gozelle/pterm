@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"io"
 	"strings"
-
+	
 	"github.com/mattn/go-runewidth"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 // BoxPrinter is able to render a box around printables.
@@ -229,10 +229,10 @@ func (p BoxPrinter) Sprint(a ...interface{}) string {
 		p.TextStyle = &ThemeDefault.BoxTextStyle
 	}
 	maxWidth := internal.GetStringMaxWidth(Sprint(a...))
-
+	
 	var topLine string
 	var bottomLine string
-
+	
 	if p.Title == "" {
 		topLine = p.BoxStyle.Sprint(p.BottomRightCornerString) + strings.Repeat(p.BoxStyle.Sprint(p.HorizontalString),
 			maxWidth+p.LeftPadding+p.RightPadding) + p.BoxStyle.Sprint(p.BottomLeftCornerString)
@@ -269,9 +269,9 @@ func (p BoxPrinter) Sprint(a ...interface{}) string {
 			bottomLine = p.BoxStyle.Sprint(p.TopRightCornerString) + internal.AddTitleToLineCenter(p.Title, p.BoxStyle.Sprint(p.HorizontalString), maxWidth+p.LeftPadding+p.RightPadding) + p.BoxStyle.Sprint(p.TopLeftCornerString)
 		}
 	}
-
+	
 	boxString := strings.Repeat("\n", p.TopPadding) + Sprint(a...) + strings.Repeat("\n", p.BottomPadding)
-
+	
 	ss := strings.Split(boxString, "\n")
 	for i, s2 := range ss {
 		if runewidth.StringWidth(RemoveColorFromString(s2)) < maxWidth {
@@ -349,7 +349,7 @@ func (p BoxPrinter) PrintOnError(a ...interface{}) *TextPrinter {
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }
@@ -365,7 +365,7 @@ func (p BoxPrinter) PrintOnErrorf(format string, a ...interface{}) *TextPrinter 
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }

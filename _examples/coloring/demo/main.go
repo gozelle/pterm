@@ -1,10 +1,10 @@
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print all colors
-
+	
 	pterm.DefaultTable.WithData([][]string{
 		{pterm.FgBlack.Sprint("Black"), pterm.FgRed.Sprint("Red"), pterm.FgGreen.Sprint("Green"), pterm.FgYellow.Sprint("Yellow")},
 		{"", pterm.FgLightRed.Sprint("Light Red"), pterm.FgLightGreen.Sprint("Light Green"), pterm.FgLightYellow.Sprint("Light Yellow")},
@@ -15,15 +15,15 @@ func main() {
 		{pterm.BgBlue.Sprint("Blue"), pterm.BgMagenta.Sprint("Magenta"), pterm.BgCyan.Sprint("Cyan"), pterm.BgWhite.Sprint("White")},
 		{pterm.BgLightBlue.Sprint("Light Blue"), pterm.BgLightMagenta.Sprint("Light Magenta"), pterm.BgLightCyan.Sprint("Light Cyan"), pterm.BgLightWhite.Sprint("Light White")},
 	}).Render()
-
+	
 	pterm.Println()
-
+	
 	// Print different colored words.
 	pterm.Println(pterm.Red("Hello, ") + pterm.Green("World") + pterm.Cyan("!"))
 	pterm.Println(pterm.Red("Even " + pterm.Cyan("nested ") + pterm.Green("colors ") + "are supported!"))
-
+	
 	pterm.Println()
-
+	
 	// Or print colors as a style
 	style := pterm.NewStyle(pterm.BgRed, pterm.FgLightGreen, pterm.Bold)
 	style.Println("This text uses a style and is bold and light green with a red background!")

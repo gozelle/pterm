@@ -3,10 +3,10 @@ package pterm
 import (
 	"io"
 	"strings"
-
+	
 	"github.com/mattn/go-runewidth"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 // Panel contains the data, which should be printed inside a PanelPrinter.
@@ -88,17 +88,17 @@ func (p PanelPrinter) getRawOutput() string {
 // Srender renders the Template as a string.
 func (p PanelPrinter) Srender() (string, error) {
 	var ret string
-
+	
 	if RawOutput {
 		return p.getRawOutput(), nil
 	}
-
+	
 	for i := range p.Panels {
 		for i2 := range p.Panels[i] {
 			p.Panels[i][i2].Data = strings.TrimSuffix(p.Panels[i][i2].Data, "\n")
 		}
 	}
-
+	
 	if p.BoxPrinter != (BoxPrinter{}) {
 		for i := range p.Panels {
 			for i2 := range p.Panels[i] {
@@ -106,7 +106,7 @@ func (p PanelPrinter) Srender() (string, error) {
 			}
 		}
 	}
-
+	
 	for i := range p.Panels {
 		if len(p.Panels)-1 != i {
 			for i2 := range p.Panels[i] {
@@ -114,9 +114,9 @@ func (p PanelPrinter) Srender() (string, error) {
 			}
 		}
 	}
-
+	
 	columnMaxHeightMap := make(map[int]int)
-
+	
 	if p.SameColumnWidth {
 		for _, panel := range p.Panels {
 			for i, p2 := range panel {
@@ -126,27 +126,27 @@ func (p PanelPrinter) Srender() (string, error) {
 			}
 		}
 	}
-
+	
 	for _, boxLine := range p.Panels {
 		var maxHeight int
-
+		
 		var renderedPanels []string
-
+		
 		for _, box := range boxLine {
 			renderedPanels = append(renderedPanels, box.Data)
 		}
-
+		
 		for i, panel := range renderedPanels {
 			renderedPanels[i] = strings.ReplaceAll(panel, "\n", Reset.Sprint()+"\n")
 		}
-
+		
 		for _, box := range renderedPanels {
 			height := len(strings.Split(box, "\n"))
 			if height > maxHeight {
 				maxHeight = height
 			}
 		}
-
+		
 		for i := 0; i < maxHeight; i++ {
 			if maxHeight != i {
 				for j, letter := range renderedPanels {
@@ -176,7 +176,7 @@ func (p PanelPrinter) Srender() (string, error) {
 			}
 		}
 	}
-
+	
 	return ret, nil
 }
 
@@ -184,6 +184,6 @@ func (p PanelPrinter) Srender() (string, error) {
 func (p PanelPrinter) Render() error {
 	s, _ := p.Srender()
 	Println(s)
-
+	
 	return nil
 }

@@ -2,9 +2,9 @@ package internal_test
 
 import (
 	"testing"
-
+	
 	"github.com/MarvinJWendt/testza"
-	"github.com/pterm/pterm/internal"
+	"github.com/gozelle/pterm/internal"
 )
 
 func TestMapRangeToRange(t *testing.T) {

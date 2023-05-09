@@ -2,8 +2,8 @@ package putils
 
 import (
 	"strings"
-
-	"github.com/pterm/pterm"
+	
+	"github.com/gozelle/pterm"
 )
 
 // TableDataFromSeparatedValues converts values, separated by separator, into pterm.TableData.
@@ -15,6 +15,6 @@ func TableDataFromSeparatedValues(text, valueSeparator, rowSeparator string) (td
 	for _, line := range strings.Split(text, rowSeparator) {
 		td = append(td, strings.Split(line, valueSeparator))
 	}
-
+	
 	return
 }

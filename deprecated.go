@@ -3,8 +3,8 @@ package pterm
 import (
 	"strconv"
 	"strings"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 // NewLettersFromString creates a Letters object from a string, which is prefilled with the LetterStyle from ThemeDefault.
@@ -21,14 +21,14 @@ func NewLettersFromString(text string) Letters {
 func NewLettersFromStringWithStyle(text string, style *Style) Letters {
 	s := strings.Split(text, "")
 	l := Letters{}
-
+	
 	for _, s2 := range s {
 		l = append(l, Letter{
 			String: s2,
 			Style:  style,
 		})
 	}
-
+	
 	return l
 }
 
@@ -38,7 +38,7 @@ func NewLettersFromStringWithStyle(text string, style *Style) Letters {
 func NewLettersFromStringWithRGB(text string, rgb RGB) Letters {
 	s := strings.Split(text, "")
 	l := Letters{}
-
+	
 	for _, s2 := range s {
 		l = append(l, Letter{
 			String: s2,
@@ -46,7 +46,7 @@ func NewLettersFromStringWithRGB(text string, rgb RGB) Letters {
 			RGB:    rgb,
 		})
 	}
-
+	
 	return l
 }
 
@@ -86,26 +86,26 @@ func NewTreeFromLeveledList(leveledListItems LeveledList) TreeNode {
 	if len(leveledListItems) == 0 {
 		return TreeNode{}
 	}
-
+	
 	root := &TreeNode{
 		Children: []TreeNode{},
 		Text:     leveledListItems[0].Text,
 	}
-
+	
 	for i, record := range leveledListItems {
 		last := root
-
+		
 		if record.Level < 0 {
 			record.Level = 0
 			leveledListItems[i].Level = 0
 		}
-
+		
 		if len(leveledListItems)-1 != i {
 			if leveledListItems[i+1].Level-1 > record.Level {
 				leveledListItems[i+1].Level = record.Level + 1
 			}
 		}
-
+		
 		for i := 0; i < record.Level; i++ {
 			lastIndex := len(last.Children) - 1
 			last = &last.Children[lastIndex]
@@ -115,7 +115,7 @@ func NewTreeFromLeveledList(leveledListItems LeveledList) TreeNode {
 			Text:     record.Text,
 		})
 	}
-
+	
 	return *root
 }
 
@@ -126,20 +126,20 @@ func NewRGBFromHEX(hex string) (RGB, error) {
 	hex = strings.ToLower(hex)
 	hex = strings.ReplaceAll(hex, "#", "")
 	hex = strings.ReplaceAll(hex, "0x", "")
-
+	
 	if len(hex) == 3 {
 		hex = string([]byte{hex[0], hex[0], hex[1], hex[1], hex[2], hex[2]})
 	}
 	if len(hex) != 6 {
 		return RGB{}, ErrHexCodeIsInvalid
 	}
-
+	
 	i64, err := strconv.ParseInt(hex, 16, 32)
 	if err != nil {
 		return RGB{}, err
 	}
 	c := int(i64)
-
+	
 	return RGB{
 		R: uint8(c >> 16),
 		G: uint8((c & 0x00FF00) >> 8),

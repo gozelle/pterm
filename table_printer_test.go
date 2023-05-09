@@ -5,10 +5,10 @@ import (
 	"io"
 	"os"
 	"testing"
-
+	
 	"github.com/MarvinJWendt/testza"
-
-	"github.com/pterm/pterm"
+	
+	"github.com/gozelle/pterm"
 )
 
 func TestTablePrinter_NilPrint(t *testing.T) {
@@ -26,13 +26,13 @@ func TestTablePrinter_Render(t *testing.T) {
 	// WithLeftAlignment
 	printer := pterm.DefaultTable.WithHasHeader().WithLeftAlignment().WithData(d)
 	content, err := printer.Srender()
-
+	
 	testza.AssertNoError(t, err)
 	testza.AssertNotNil(t, content)
 	// WithRightAlignment
 	printer = pterm.DefaultTable.WithHasHeader().WithRightAlignment().WithData(d)
 	content, err = printer.Srender()
-
+	
 	testza.AssertNoError(t, err)
 	testza.AssertNotNil(t, content)
 }
@@ -87,14 +87,14 @@ func TestTablePrinter_WithData(t *testing.T) {
 	}
 	p := pterm.TablePrinter{}
 	p2 := p.WithData(d)
-
+	
 	testza.AssertEqual(t, d, p2.Data)
 }
 
 func TestTablePrinter_WithHasHeader(t *testing.T) {
 	p := pterm.TablePrinter{}
 	p2 := p.WithHasHeader()
-
+	
 	testza.AssertTrue(t, p2.HasHeader)
 }
 
@@ -102,14 +102,14 @@ func TestTablePrinter_WithHeaderStyle(t *testing.T) {
 	s := pterm.NewStyle(pterm.FgRed, pterm.BgBlue, pterm.Bold)
 	p := pterm.TablePrinter{}
 	p2 := p.WithHeaderStyle(s)
-
+	
 	testza.AssertEqual(t, s, p2.HeaderStyle)
 }
 
 func TestTablePrinter_WithSeparator(t *testing.T) {
 	p := pterm.TablePrinter{}
 	p2 := p.WithSeparator("-")
-
+	
 	testza.AssertEqual(t, "-", p2.Separator)
 }
 
@@ -117,14 +117,14 @@ func TestTablePrinter_WithSeparatorStyle(t *testing.T) {
 	s := pterm.NewStyle(pterm.FgRed, pterm.BgBlue, pterm.Bold)
 	p := pterm.TablePrinter{}
 	p2 := p.WithSeparatorStyle(s)
-
+	
 	testza.AssertEqual(t, s, p2.SeparatorStyle)
 }
 
 func TestTablePrinter_WithHeaderRowSeparator(t *testing.T) {
 	p := pterm.TablePrinter{}
 	p2 := p.WithHeaderRowSeparator("-")
-
+	
 	testza.AssertEqual(t, "-", p2.HeaderRowSeparator)
 }
 
@@ -132,14 +132,14 @@ func TestTablePrinter_WithHeaderRowSeparatorStyle(t *testing.T) {
 	s := pterm.NewStyle(pterm.FgRed, pterm.BgBlue, pterm.Bold)
 	p := pterm.TablePrinter{}
 	p2 := p.WithHeaderRowSeparatorStyle(s)
-
+	
 	testza.AssertEqual(t, s, p2.HeaderRowSeparatorStyle)
 }
 
 func TestTablePrinter_WithRowSeparator(t *testing.T) {
 	p := pterm.TablePrinter{}
 	p2 := p.WithRowSeparator("-")
-
+	
 	testza.AssertEqual(t, "-", p2.RowSeparator)
 }
 
@@ -147,7 +147,7 @@ func TestTablePrinter_WithRowSeparatorStyle(t *testing.T) {
 	s := pterm.NewStyle(pterm.FgRed, pterm.BgBlue, pterm.Bold)
 	p := pterm.TablePrinter{}
 	p2 := p.WithRowSeparatorStyle(s)
-
+	
 	testza.AssertEqual(t, s, p2.RowSeparatorStyle)
 }
 
@@ -155,7 +155,7 @@ func TestTablePrinter_WithStyle(t *testing.T) {
 	s := pterm.NewStyle(pterm.FgRed, pterm.BgBlue, pterm.Bold)
 	p := pterm.TablePrinter{}
 	p2 := p.WithStyle(s)
-
+	
 	testza.AssertEqual(t, s, p2.Style)
 }
 
@@ -163,7 +163,7 @@ func TestTablePrinter_WithLeftAlignment(t *testing.T) {
 	s := true
 	p := pterm.TablePrinter{}
 	p2 := p.WithLeftAlignment(s)
-
+	
 	testza.AssertEqual(t, s, p2.LeftAlignment)
 }
 
@@ -171,7 +171,7 @@ func TestTablePrinter_WithRightAlignment(t *testing.T) {
 	s := true
 	p := pterm.TablePrinter{}
 	p2 := p.WithRightAlignment(s)
-
+	
 	testza.AssertEqual(t, s, p2.RightAlignment)
 }
 
@@ -179,7 +179,7 @@ func TestTablePrinter_WithWriter(t *testing.T) {
 	p := pterm.TablePrinter{}
 	s := os.Stderr
 	p2 := p.WithWriter(s)
-
+	
 	testza.AssertEqual(t, s, p2.Writer)
 	testza.AssertZero(t, p.Writer)
 }

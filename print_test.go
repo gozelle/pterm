@@ -5,11 +5,11 @@ import (
 	"io"
 	"os"
 	"testing"
-
+	
 	"github.com/MarvinJWendt/testza"
-
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/internal"
 )
 
 // pterm.Sprint functions
@@ -58,7 +58,7 @@ func TestPrint(t *testing.T) {
 			testza.AssertEqual(t, randomString, out)
 		}
 	})
-
+	
 	t.Run("disabled output", func(t *testing.T) {
 		pterm.Output = false
 		for _, randomString := range internal.RandomStrings {
@@ -81,7 +81,7 @@ func TestPrintln(t *testing.T) {
 			testza.AssertEqual(t, randomString+"\n", out)
 		}
 	})
-
+	
 	t.Run("disabled output", func(t *testing.T) {
 		pterm.Output = false
 		for _, randomString := range internal.RandomStrings {
@@ -108,7 +108,7 @@ func TestPrintf(t *testing.T) {
 		})
 		testza.AssertEqual(t, "Hello, World!", out)
 	})
-
+	
 	t.Run("disabled output", func(t *testing.T) {
 		pterm.Output = false
 		for _, randomString := range internal.RandomStrings {
@@ -139,7 +139,7 @@ func TestPrintfln(t *testing.T) {
 		})
 		testza.AssertEqual(t, "Hello, World!\n", out)
 	})
-
+	
 	t.Run("disabled output", func(t *testing.T) {
 		pterm.Output = false
 		for _, randomString := range internal.RandomStrings {
@@ -168,7 +168,7 @@ func TestFprint(t *testing.T) {
 			testza.AssertEqual(t, randomString, out)
 		}
 	})
-
+	
 	t.Run("confirm defaults to default output when no writer provided", func(t *testing.T) {
 		pterm.Output = true
 		for _, randomString := range internal.RandomStrings {
@@ -178,7 +178,7 @@ func TestFprint(t *testing.T) {
 			testza.AssertEqual(t, randomString, out)
 		}
 	})
-
+	
 	t.Run("disabled output", func(t *testing.T) {
 		pterm.Output = false
 		for _, randomString := range internal.RandomStrings {
@@ -203,7 +203,7 @@ func TestFprintln(t *testing.T) {
 			testza.AssertEqual(t, randomString+"\n", out)
 		}
 	})
-
+	
 	t.Run("confirm defaults to default output when no writer provided", func(t *testing.T) {
 		pterm.Output = true
 		for _, randomString := range internal.RandomStrings {
@@ -213,7 +213,7 @@ func TestFprintln(t *testing.T) {
 			testza.AssertEqual(t, randomString+"\n", out)
 		}
 	})
-
+	
 	t.Run("disabled output", func(t *testing.T) {
 		pterm.Output = false
 		for _, randomString := range internal.RandomStrings {
@@ -236,7 +236,7 @@ func TestPrinto(t *testing.T) {
 			testza.AssertEqual(t, "\r"+randomString, out)
 		}
 	})
-
+	
 	t.Run("disabled output", func(t *testing.T) {
 		pterm.Output = false
 		for _, randomString := range internal.RandomStrings {
@@ -261,7 +261,7 @@ func TestFprinto(t *testing.T) {
 			testza.AssertEqual(t, "\r"+randomString, out)
 		}
 	})
-
+	
 	t.Run("confirm defaults to default output when no writer provided", func(t *testing.T) {
 		pterm.Output = true
 		for _, randomString := range internal.RandomStrings {
@@ -271,7 +271,7 @@ func TestFprinto(t *testing.T) {
 			testza.AssertEqual(t, "\r"+randomString, out)
 		}
 	})
-
+	
 	t.Run("disabled output", func(t *testing.T) {
 		pterm.Output = false
 		for _, randomString := range internal.RandomStrings {

@@ -5,7 +5,7 @@
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	result, _ := pterm.DefaultInteractiveTextInput.WithMask("*").Show("Enter your password")

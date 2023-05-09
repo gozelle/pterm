@@ -3,9 +3,9 @@ package pterm_test
 import (
 	"os"
 	"testing"
-
+	
 	"github.com/MarvinJWendt/testza"
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 	"golang.org/x/term"
 )
 

@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"io"
 	"strings"
-
+	
 	"github.com/mattn/go-runewidth"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 // DefaultCenter is the default CenterPrinter.
@@ -40,11 +40,11 @@ func (p CenterPrinter) Sprint(a ...interface{}) string {
 	if RawOutput {
 		return Sprint(a...)
 	}
-
+	
 	lines := strings.Split(Sprint(a...), "\n")
-
+	
 	var ret string
-
+	
 	if p.CenterEachLineSeparately {
 		for _, line := range lines {
 			margin := (GetTerminalWidth() - runewidth.StringWidth(RemoveColorFromString(line))) / 2
@@ -56,30 +56,30 @@ func (p CenterPrinter) Sprint(a ...interface{}) string {
 		}
 		return ret
 	}
-
+	
 	var maxLineWidth int
-
+	
 	for _, line := range lines {
 		lineLength := runewidth.StringWidth(RemoveColorFromString(line))
 		if maxLineWidth < lineLength {
 			maxLineWidth = lineLength
 		}
 	}
-
+	
 	indent := GetTerminalWidth() - maxLineWidth
-
+	
 	if indent/2 < 1 {
 		for _, line := range lines {
 			ret += line + "\n"
 		}
-
+		
 		return ret
 	}
-
+	
 	for _, line := range lines {
 		ret += strings.Repeat(" ", indent/2) + line + "\n"
 	}
-
+	
 	return ret
 }
 
@@ -146,7 +146,7 @@ func (p CenterPrinter) PrintOnError(a ...interface{}) *TextPrinter {
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }
@@ -162,7 +162,7 @@ func (p CenterPrinter) PrintOnErrorf(format string, a ...interface{}) *TextPrint
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }

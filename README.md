@@ -5,15 +5,15 @@
 
 <p align="center">
 
-<a href="https://github.com/pterm/pterm/releases" style="text-decoration: none">
+<a href="https://github.com/gozelle/pterm/releases" style="text-decoration: none">
 <img src="https://img.shields.io/github/v/release/pterm/pterm?style=flat-square" alt="Latest Release">
 </a>
 
-<a href="https://github.com/pterm/pterm/stargazers" style="text-decoration: none">
+<a href="https://github.com/gozelle/pterm/stargazers" style="text-decoration: none">
 <img src="https://img.shields.io/github/stars/pterm/pterm.svg?style=flat-square" alt="Stars">
 </a>
 
-<a href="https://github.com/pterm/pterm/fork" style="text-decoration: none">
+<a href="https://github.com/gozelle/pterm/fork" style="text-decoration: none">
 <img src="https://img.shields.io/github/forks/pterm/pterm.svg?style=flat-square" alt="Forks">
 </a>
 
@@ -31,7 +31,7 @@
 
 <br/>
 
-<a href="https://github.com/pterm/pterm/releases" style="text-decoration: none">
+<a href="https://github.com/gozelle/pterm/releases" style="text-decoration: none">
 <img src="https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-informational?style=for-the-badge" alt="Downloads">
 </a>
 
@@ -42,7 +42,7 @@
 <br/>
 <br/>
 
-<a href="https://github.com/pterm/pterm/tree/master/_examples/demo/demo" style="text-decoration: none">
+<a href="https://github.com/gozelle/pterm/tree/master/_examples/demo/demo" style="text-decoration: none">
 <img src="https://raw.githubusercontent.com/pterm/pterm/master/_examples/demo/demo/animation.svg" alt="PTerm">
 <p align="center">Show Demo Code</p>
 </a>
@@ -60,9 +60,9 @@
 |
 <strong><a href="https://docs.pterm.sh/">Documentation</a></strong>
 |
-<strong><a href="https://github.com/pterm/pterm/tree/master/_examples">Examples</a></strong>
+<strong><a href="https://github.com/gozelle/pterm/tree/master/_examples">Examples</a></strong>
 |
-<strong><a href="https://github.com/pterm/pterm/discussions?discussions_q=category%3AQ%26A">Q&A</a></strong>
+<strong><a href="https://github.com/gozelle/pterm/discussions?discussions_q=category%3AQ%26A">Q&A</a></strong>
 |
 <strong><a href="https://discord.gg/vE2dNkfAmF">Discord</a></strong>
 </p>
@@ -75,7 +75,7 @@ To make PTerm available in your project, you can run the following command.\
 Make sure to run this command inside your project, when you're using go modules 😉
 
 ```sh
-go get github.com/pterm/pterm
+go get github.com/gozelle/pterm
 ```
 
 ## ⭐ Main Features
@@ -88,19 +88,19 @@ go get github.com/pterm/pterm
 | ✨ Consistent Colors | PTerm uses the [ANSI color scheme](https://en.wikipedia.org/wiki/ANSI_escape_code#3/4_bit) for uniformity and supports `TrueColor` for advanced terminals. |
 | 📚 Component system | PTerm's flexible `Printers` can be used individually or combined to generate beautiful console output. |
 | 🛠 Configurable   | PTerm is ready to use without configuration but allows easy customization for unique terminal output. |
-| ✏ Documentation  | Access comprehensive docs on [pkg.go.dev](https://pkg.go.dev/github.com/pterm/pterm#section-documentation) and view practical examples in the [examples section](#-examples). |
+| ✏ Documentation  | Access comprehensive docs on [pkg.go.dev](https://pkg.go.dev/github.com/gozelle/pterm#section-documentation) and view practical examples in the [examples section](#-examples). |
 
 ### Printers (Components)
 
 <!-- printers:start -->
 | Feature | Feature | Feature | Feature | Feature |
 | :-------: | :-------: | :-------: | :-------: | :-------: |
-| Area <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/area) |Barchart <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/barchart) |Basictext <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/basictext) |Bigtext <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/bigtext) |Box <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/box) |
-| Bulletlist <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/bulletlist) |Center <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/center) |Coloring <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/coloring) |Demo <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/demo) |Header <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/header) |
-| Interactive confirm <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/interactive_confirm) |Interactive continue <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/interactive_continue) |Interactive multiselect <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/interactive_multiselect) |Interactive select <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/interactive_select) |Interactive textinput <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/interactive_textinput) |
-| Logger <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/logger) |Panel <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/panel) |Paragraph <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/paragraph) |Prefix <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/prefix) |Progressbar <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/progressbar) |
-| Section <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/section) |Spinner <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/spinner) |Style <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/style) |Table <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/table) |Theme <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/theme) |
-| Tree <br/> [(Examples)](https://github.com/pterm/pterm/tree/master/_examples/tree) | |  |  |  | 
+| Area <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/area) |Barchart <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/barchart) |Basictext <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/basictext) |Bigtext <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/bigtext) |Box <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/box) |
+| Bulletlist <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/bulletlist) |Center <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/center) |Coloring <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/coloring) |Demo <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/demo) |Header <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/header) |
+| Interactive confirm <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/interactive_confirm) |Interactive continue <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/interactive_continue) |Interactive multiselect <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/interactive_multiselect) |Interactive select <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/interactive_select) |Interactive textinput <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/interactive_textinput) |
+| Logger <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/logger) |Panel <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/panel) |Paragraph <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/paragraph) |Prefix <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/prefix) |Progressbar <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/progressbar) |
+| Section <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/section) |Spinner <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/spinner) |Style <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/style) |Table <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/table) |Theme <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/theme) |
+| Tree <br/> [(Examples)](https://github.com/gozelle/pterm/tree/master/_examples/tree) | |  |  |  | 
 <!-- printers:end -->
 
 
@@ -121,7 +121,7 @@ go get github.com/pterm/pterm
 <tbody>
 <td align="center">
 <img width="2000" height="0"><br>
-<a href="https://github.com/pterm/pterm/tree/master/_examples">‼️ You can find all the examples, in a much better structure and their source code, in "_examples" ‼️</a><br>
+<a href="https://github.com/gozelle/pterm/tree/master/_examples">‼️ You can find all the examples, in a much better structure and their source code, in "_examples" ‼️</a><br>
 <sub>Click on the link above to show the examples folder.</sub>
 <img width="2000" height="0">
 </td>
@@ -144,7 +144,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -176,7 +176,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -208,7 +208,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -242,7 +242,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -284,7 +284,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -316,7 +316,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -345,7 +345,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -376,7 +376,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -407,7 +407,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -439,7 +439,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -478,7 +478,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -509,7 +509,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -541,7 +541,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -589,7 +589,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -628,7 +628,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBarChart.WithBars([]pterm.Bar{
@@ -659,7 +659,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// A BasicText printer is used to print text, without special formatting.
@@ -687,8 +687,8 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {
@@ -714,8 +714,8 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {
@@ -738,8 +738,8 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {
@@ -774,7 +774,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBox.
@@ -800,7 +800,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultBox.Println("Hello, World!")
@@ -821,7 +821,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.Info.Println("This might not be rendered correctly on GitHub,\nbut it will work in a real terminal.\nThis is because GitHub does not use a monospaced font by default for SVGs")
@@ -853,7 +853,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Default titled bpx
@@ -892,7 +892,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -920,8 +920,8 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {
@@ -955,7 +955,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	pterm.DefaultCenter.Println("This text is centered!\nIt centeres the whole block by default.\nIn that way you can do stuff like this:")
@@ -982,7 +982,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print all colors
@@ -1026,7 +1026,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	for i := 0; i < 15; i++ {
@@ -1059,7 +1059,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1094,7 +1094,7 @@ package main
 import (
 	"strings"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1175,7 +1175,7 @@ package main
 import (
 	"strings"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1219,7 +1219,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print default error.
@@ -1250,7 +1250,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print strings with a custom RGB color.
@@ -1276,7 +1276,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1316,8 +1316,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 // Speed the demo up, by setting this flag.
@@ -1590,10 +1590,10 @@ func randomInt(min, max int) int {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
-	// All available options: https://pkg.go.dev/github.com/pterm/pterm#HeaderPrinter
+	// All available options: https://pkg.go.dev/github.com/gozelle/pterm#HeaderPrinter
 
 	// Build on top of DefaultHeader
 	pterm.DefaultHeader. // Use DefaultHeader as base
@@ -1630,7 +1630,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print a default header.
@@ -1655,7 +1655,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1687,7 +1687,7 @@ func boolToText(b bool) string {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1716,7 +1716,7 @@ import (
 
 	"atomicgo.dev/keyboard/keys"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1754,7 +1754,7 @@ import (
 	"fmt"
 
 	"atomicgo.dev/keyboard/keys"
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1790,7 +1790,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1826,7 +1826,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1860,7 +1860,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1885,7 +1885,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -1909,7 +1909,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	result, _ := pterm.DefaultInteractiveTextInput.WithMask("*").Show("Enter your password")
@@ -1933,7 +1933,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	logger := pterm.DefaultLogger.WithLevel(pterm.LogLevelTrace) // Only show logs with a level of Trace or higher.
@@ -1969,7 +1969,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 	"time"
 )
 
@@ -2010,7 +2010,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 	"time"
 )
 
@@ -2060,7 +2060,7 @@ func sleep() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	logger := pterm.DefaultLogger.
@@ -2099,7 +2099,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	logger := pterm.DefaultLogger.
@@ -2138,7 +2138,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Declare panels in a two dimensional grid system.
@@ -2166,7 +2166,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print a paragraph with a custom maximal width.
@@ -2197,7 +2197,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print long text with default paragraph printer.
@@ -2228,7 +2228,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Enable debug messages.
@@ -2263,7 +2263,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 // Slice of strings with placeholder text.
@@ -2297,7 +2297,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print a section with level one.
@@ -2329,7 +2329,7 @@ package main
 import (
 	"time"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -2391,7 +2391,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create styles as new variables
@@ -2418,7 +2418,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a fork of the default table, fill it with data and print it.
@@ -2447,7 +2447,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a fork of the default table, fill it with data and print it.
@@ -2487,7 +2487,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a table with multiple lines in a row and set a row separator.
@@ -2515,7 +2515,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Create a fork of the default table, fill it with data and print it.
@@ -2545,7 +2545,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 	"reflect"
 	"time"
 )
@@ -2589,7 +2589,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -2624,8 +2624,8 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {

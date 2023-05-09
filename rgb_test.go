@@ -6,10 +6,10 @@ import (
 	"reflect"
 	"strconv"
 	"testing"
-
+	
 	"github.com/MarvinJWendt/testza"
-
-	"github.com/pterm/pterm"
+	
+	"github.com/gozelle/pterm"
 )
 
 func TestNewRGB(t *testing.T) {
@@ -156,7 +156,7 @@ func TestRGB_GetValues(t *testing.T) {
 
 func TestRGB_Print(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run(pterm.Sprintf("%v %v %v", rgb.R, rgb.G, rgb.B), func(t *testing.T) {
 			testPrintContains(t, func(w io.Writer, a interface{}) {
@@ -169,7 +169,7 @@ func TestRGB_Print(t *testing.T) {
 
 func TestRGB_Printf(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run(pterm.Sprintf("%v %v %v", rgb.R, rgb.G, rgb.B), func(t *testing.T) {
 			testPrintfContains(t, func(w io.Writer, format string, a interface{}) {
@@ -182,7 +182,7 @@ func TestRGB_Printf(t *testing.T) {
 
 func TestRGB_Printfln(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run(pterm.Sprintfln("%v %v %v", rgb.R, rgb.G, rgb.B), func(t *testing.T) {
 			testPrintflnContains(t, func(w io.Writer, format string, a interface{}) {
@@ -195,7 +195,7 @@ func TestRGB_Printfln(t *testing.T) {
 
 func TestRGB_Println(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run(pterm.Sprintf("%v %v %v", rgb.R, rgb.G, rgb.B), func(t *testing.T) {
 			testPrintlnContains(t, func(w io.Writer, a interface{}) {
@@ -208,7 +208,7 @@ func TestRGB_Println(t *testing.T) {
 
 func TestRGB_Sprint(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run(pterm.Sprintf("%v %v %v", rgb.R, rgb.G, rgb.B), func(t *testing.T) {
 			testSprintContains(t, func(a interface{}) string {
@@ -220,7 +220,7 @@ func TestRGB_Sprint(t *testing.T) {
 
 func TestRGB_Sprintf(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run("", func(t *testing.T) {
 			testSprintfContains(t, func(format string, a interface{}) string {
@@ -232,7 +232,7 @@ func TestRGB_Sprintf(t *testing.T) {
 
 func TestRGB_Sprintfln(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run("", func(t *testing.T) {
 			testSprintflnContains(t, func(format string, a interface{}) string {
@@ -244,7 +244,7 @@ func TestRGB_Sprintfln(t *testing.T) {
 
 func TestRGB_Sprintln(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run(pterm.Sprintf("%v %v %v", rgb.R, rgb.G, rgb.B), func(t *testing.T) {
 			testSprintlnContains(t, func(a interface{}) string {
@@ -256,7 +256,7 @@ func TestRGB_Sprintln(t *testing.T) {
 
 func TestRGB_PrintOnError(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run("PrintOnError", func(t *testing.T) {
 			result := captureStdout(func(w io.Writer) {
@@ -269,7 +269,7 @@ func TestRGB_PrintOnError(t *testing.T) {
 
 func TestRGB_PrintIfError_WithoutError(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run("PrintIfError_WithoutError", func(t *testing.T) {
 			result := captureStdout(func(w io.Writer) {
@@ -282,7 +282,7 @@ func TestRGB_PrintIfError_WithoutError(t *testing.T) {
 
 func TestRGB_PrintOnErrorf(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run("PrintOnErrorf", func(t *testing.T) {
 			result := captureStdout(func(w io.Writer) {
@@ -295,7 +295,7 @@ func TestRGB_PrintOnErrorf(t *testing.T) {
 
 func TestRGB_PrintIfError_WithoutErrorf(t *testing.T) {
 	RGBs := []pterm.RGB{{0, 0, 0, false}, {127, 127, 127, false}, {255, 255, 255, false}}
-
+	
 	for _, rgb := range RGBs {
 		t.Run("PrintIfError_WithoutErrorf", func(t *testing.T) {
 			result := captureStdout(func(w io.Writer) {

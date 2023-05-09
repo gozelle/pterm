@@ -2,10 +2,10 @@ package pterm
 
 import (
 	"fmt"
-
+	
 	"github.com/gookit/color"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 // RGB color model is an additive color model in which red, green, and blue light are added together in various ways to reproduce a broad array of colors.
@@ -21,7 +21,7 @@ type RGB struct {
 type RGBStyle struct {
 	Options                []Color
 	Foreground, Background RGB
-
+	
 	hasBg bool
 }
 
@@ -90,7 +90,7 @@ func (p RGBStyle) PrintOnError(a ...interface{}) *TextPrinter {
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }
@@ -106,7 +106,7 @@ func (p RGBStyle) PrintOnErrorf(format string, a ...interface{}) *TextPrinter {
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }
@@ -153,11 +153,11 @@ func (p RGB) GetValues() (r, g, b uint8) {
 // NewRGB returns a new RGB.
 func NewRGB(r, g, b uint8, background ...bool) RGB {
 	var bg bool
-
+	
 	if len(background) > 0 {
 		bg = background[0]
 	}
-
+	
 	return RGB{R: r, G: g, B: b, Background: bg}
 }
 
@@ -267,7 +267,7 @@ func (p RGB) PrintOnError(a ...interface{}) *TextPrinter {
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }
@@ -283,7 +283,7 @@ func (p RGB) PrintOnErrorf(format string, a ...interface{}) *TextPrinter {
 			}
 		}
 	}
-
+	
 	tp := TextPrinter(p)
 	return &tp
 }
@@ -292,6 +292,6 @@ func (p RGB) ToRGBStyle() RGBStyle {
 	if p.Background {
 		return RGBStyle{Background: p}
 	}
-
+	
 	return RGBStyle{Foreground: p}
 }

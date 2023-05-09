@@ -2,9 +2,9 @@ package putils
 
 import (
 	"testing"
-
+	
 	"github.com/MarvinJWendt/testza"
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func TestTableDataFromCSV(t *testing.T) {
@@ -12,8 +12,8 @@ func TestTableDataFromCSV(t *testing.T) {
 		[]string{"firstname", "lastname", "username"},
 		[]string{"Marvin", "Wendt", "MarvinJWendt"},
 	}
-
+	
 	input := "firstname,lastname,username\nMarvin,Wendt,MarvinJWendt"
-
+	
 	testza.AssertEqualValues(t, expected, TableDataFromCSV(input))
 }

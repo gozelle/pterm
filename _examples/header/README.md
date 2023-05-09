@@ -9,10 +9,10 @@
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
-	// All available options: https://pkg.go.dev/github.com/pterm/pterm#HeaderPrinter
+	// All available options: https://pkg.go.dev/github.com/gozelle/pterm#HeaderPrinter
 
 	// Build on top of DefaultHeader
 	pterm.DefaultHeader. // Use DefaultHeader as base
@@ -49,7 +49,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	// Print a default header.

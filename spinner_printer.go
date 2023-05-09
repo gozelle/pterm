@@ -3,8 +3,8 @@ package pterm
 import (
 	"io"
 	"time"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 var activeSpinnerPrinters []*SpinnerPrinter
@@ -41,12 +41,12 @@ type SpinnerPrinter struct {
 	ShowTimer           bool
 	TimerRoundingFactor time.Duration
 	TimerStyle          *Style
-
+	
 	IsActive bool
-
+	
 	startedAt       time.Time
 	currentSequence string
-
+	
 	Writer io.Writer
 }
 
@@ -128,15 +128,15 @@ func (s SpinnerPrinter) Start(text ...interface{}) (*SpinnerPrinter, error) {
 	s.IsActive = true
 	s.startedAt = time.Now()
 	activeSpinnerPrinters = append(activeSpinnerPrinters, &s)
-
+	
 	if len(text) != 0 {
 		s.Text = Sprint(text...)
 	}
-
+	
 	if RawOutput {
 		Fprintln(s.Writer, s.Text)
 	}
-
+	
 	go func() {
 		for s.IsActive {
 			for _, seq := range s.Sequence {
@@ -147,7 +147,7 @@ func (s SpinnerPrinter) Start(text ...interface{}) (*SpinnerPrinter, error) {
 					time.Sleep(s.Delay)
 					continue
 				}
-
+				
 				var timer string
 				if s.ShowTimer {
 					timer = " (" + time.Since(s.startedAt).Round(s.TimerRoundingFactor).String() + ")"
@@ -202,7 +202,7 @@ func (s *SpinnerPrinter) Info(message ...interface{}) {
 	if s.InfoPrinter == nil {
 		s.InfoPrinter = &Info
 	}
-
+	
 	if len(message) == 0 {
 		message = []interface{}{s.Text}
 	}
@@ -217,7 +217,7 @@ func (s *SpinnerPrinter) Success(message ...interface{}) {
 	if s.SuccessPrinter == nil {
 		s.SuccessPrinter = &Success
 	}
-
+	
 	if len(message) == 0 {
 		message = []interface{}{s.Text}
 	}
@@ -232,7 +232,7 @@ func (s *SpinnerPrinter) Fail(message ...interface{}) {
 	if s.FailPrinter == nil {
 		s.FailPrinter = &Error
 	}
-
+	
 	if len(message) == 0 {
 		message = []interface{}{s.Text}
 	}
@@ -247,7 +247,7 @@ func (s *SpinnerPrinter) Warning(message ...interface{}) {
 	if s.WarningPrinter == nil {
 		s.WarningPrinter = &Warning
 	}
-
+	
 	if len(message) == 0 {
 		message = []interface{}{s.Text}
 	}

@@ -10,8 +10,8 @@
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {
@@ -37,8 +37,8 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {
@@ -61,8 +61,8 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 func main() {

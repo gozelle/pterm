@@ -3,13 +3,13 @@ package pterm
 import (
 	"fmt"
 	"sort"
-
+	
 	"atomicgo.dev/cursor"
 	"atomicgo.dev/keyboard"
 	"atomicgo.dev/keyboard/keys"
 	"github.com/lithammer/fuzzysearch/fuzzy"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 var (
@@ -42,7 +42,7 @@ type InteractiveMultiselectPrinter struct {
 	SelectorStyle  *Style
 	Filter         bool
 	Checkmark      *Checkmark
-
+	
 	selectedOption        int
 	selectedOptions       []int
 	text                  string
@@ -51,7 +51,7 @@ type InteractiveMultiselectPrinter struct {
 	displayedOptions      []string
 	displayedOptionsStart int
 	displayedOptionsEnd   int
-
+	
 	KeySelect  keys.KeyCode
 	KeyConfirm keys.KeyCode
 }
@@ -110,58 +110,58 @@ func (p *InteractiveMultiselectPrinter) Show(text ...string) ([]string, error) {
 	// and all the needed cleanup can be done before
 	cancel, exit := internal.NewCancelationSignal()
 	defer exit()
-
+	
 	if len(text) == 0 || Sprint(text[0]) == "" {
 		text = []string{p.DefaultText}
 	}
-
+	
 	p.text = p.TextStyle.Sprint(text[0])
 	p.fuzzySearchMatches = append([]string{}, p.Options...)
-
+	
 	if p.MaxHeight == 0 {
 		p.MaxHeight = DefaultInteractiveMultiselect.MaxHeight
 	}
-
+	
 	maxHeight := p.MaxHeight
 	if maxHeight > len(p.fuzzySearchMatches) {
 		maxHeight = len(p.fuzzySearchMatches)
 	}
-
+	
 	if len(p.Options) == 0 {
 		return nil, fmt.Errorf("no options provided")
 	}
-
+	
 	p.displayedOptions = append([]string{}, p.fuzzySearchMatches[:maxHeight]...)
 	p.displayedOptionsStart = 0
 	p.displayedOptionsEnd = maxHeight
-
+	
 	for _, option := range p.DefaultOptions {
 		p.selectOption(option)
 	}
-
+	
 	area, err := DefaultArea.Start(p.renderSelectMenu())
 	defer area.Stop()
 	if err != nil {
 		return nil, fmt.Errorf("could not start area: %w", err)
 	}
-
+	
 	if p.Filter && (p.KeyConfirm == keys.Space || p.KeySelect == keys.Space) {
 		return nil, fmt.Errorf("if filter/search is active, keys.Space can not be used for KeySelect or KeyConfirm")
 	}
-
+	
 	area.Update(p.renderSelectMenu())
-
+	
 	cursor.Hide()
 	defer cursor.Show()
 	err = keyboard.Listen(func(keyInfo keys.Key) (stop bool, err error) {
 		key := keyInfo.Code
-
+		
 		if p.MaxHeight > len(p.fuzzySearchMatches) {
 			maxHeight = len(p.fuzzySearchMatches)
 		} else {
 			maxHeight = p.MaxHeight
 		}
-
+		
 		switch key {
 		case p.KeyConfirm:
 			if len(p.fuzzySearchMatches) == 0 {
@@ -198,24 +198,24 @@ func (p *InteractiveMultiselectPrinter) Show(text ...string) ([]string, error) {
 				// Handle UTF-8 characters
 				p.fuzzySearchString = string([]rune(p.fuzzySearchString)[:len([]rune(p.fuzzySearchString))-1])
 			}
-
+			
 			if p.fuzzySearchString == "" {
 				p.fuzzySearchMatches = append([]string{}, p.Options...)
 			}
-
+			
 			p.renderSelectMenu()
-
+			
 			if len(p.fuzzySearchMatches) > p.MaxHeight {
 				maxHeight = p.MaxHeight
 			} else {
 				maxHeight = len(p.fuzzySearchMatches)
 			}
-
+			
 			p.selectedOption = 0
 			p.displayedOptionsStart = 0
 			p.displayedOptionsEnd = maxHeight
 			p.displayedOptions = append([]string{}, p.fuzzySearchMatches[p.displayedOptionsStart:p.displayedOptionsEnd]...)
-
+			
 			area.Update(p.renderSelectMenu())
 		case keys.Left:
 			// Unselect all options
@@ -249,7 +249,7 @@ func (p *InteractiveMultiselectPrinter) Show(text ...string) ([]string, error) {
 				p.displayedOptionsEnd = len(p.fuzzySearchMatches)
 				p.displayedOptions = append([]string{}, p.fuzzySearchMatches[p.displayedOptionsStart:p.displayedOptionsEnd]...)
 			}
-
+			
 			area.Update(p.renderSelectMenu())
 		case keys.Down:
 			if len(p.fuzzySearchMatches) == 0 {
@@ -269,25 +269,25 @@ func (p *InteractiveMultiselectPrinter) Show(text ...string) ([]string, error) {
 				p.displayedOptionsEnd = maxHeight
 				p.displayedOptions = append([]string{}, p.fuzzySearchMatches[p.displayedOptionsStart:p.displayedOptionsEnd]...)
 			}
-
+			
 			area.Update(p.renderSelectMenu())
 		case keys.CtrlC:
 			cancel()
 			return true, nil
 		}
-
+		
 		return false, nil
 	})
 	if err != nil {
 		Error.Println(err)
 		return nil, fmt.Errorf("failed to start keyboard listener: %w", err)
 	}
-
+	
 	var result []string
 	for _, selectedOption := range p.selectedOptions {
 		result = append(result, p.Options[selectedOption])
 	}
-
+	
 	return result, nil
 }
 
@@ -306,7 +306,7 @@ func (p *InteractiveMultiselectPrinter) isSelected(optionText string) bool {
 			return true
 		}
 	}
-
+	
 	return false
 }
 
@@ -328,7 +328,7 @@ func (p *InteractiveMultiselectPrinter) selectOption(optionText string) {
 func (p *InteractiveMultiselectPrinter) renderSelectMenu() string {
 	var content string
 	content += Sprintf("%s: %s\n", p.text, p.fuzzySearchString)
-
+	
 	// find options that match fuzzy search string
 	rankedResults := fuzzy.RankFindFold(p.fuzzySearchString, p.Options)
 	// map rankedResults to fuzzySearchMatches
@@ -339,7 +339,7 @@ func (p *InteractiveMultiselectPrinter) renderSelectMenu() string {
 	for _, result := range rankedResults {
 		p.fuzzySearchMatches = append(p.fuzzySearchMatches, result.Target)
 	}
-
+	
 	indexMapper := make([]string, len(p.fuzzySearchMatches))
 	for i := 0; i < len(p.fuzzySearchMatches); i++ {
 		// if in displayed options range
@@ -347,7 +347,7 @@ func (p *InteractiveMultiselectPrinter) renderSelectMenu() string {
 			indexMapper[i] = p.fuzzySearchMatches[i]
 		}
 	}
-
+	
 	for i, option := range indexMapper {
 		if option == "" {
 			continue
@@ -364,13 +364,13 @@ func (p *InteractiveMultiselectPrinter) renderSelectMenu() string {
 			content += Sprintf("  %s %s\n", checkmark, option)
 		}
 	}
-
+	
 	help := fmt.Sprintf("%s: %s | %s: %s | left: %s | right: %s", p.KeySelect, Bold.Sprint("select"), p.KeyConfirm, Bold.Sprint("confirm"), Bold.Sprint("none"), Bold.Sprint("all"))
 	if p.Filter {
 		help += fmt.Sprintf("| type to %s", Bold.Sprint("filter"))
 	}
 	content += ThemeDefault.SecondaryStyle.Sprintfln(help)
-
+	
 	return content
 }
 
@@ -380,7 +380,7 @@ func (p InteractiveMultiselectPrinter) renderFinishedMenu() string {
 	for _, option := range p.selectedOptions {
 		content += Sprintf("  %s %s\n", p.renderSelector(), p.Options[option])
 	}
-
+	
 	return content
 }
 

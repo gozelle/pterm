@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pterm/pterm"
-	"github.com/pterm/pterm/putils"
+	"github.com/gozelle/pterm"
+	"github.com/gozelle/pterm/putils"
 )
 
 // Speed the demo up, by setting this flag.

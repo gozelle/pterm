@@ -3,7 +3,7 @@
 //
 // Official docs are available at: https://docs.pterm.sh
 //
-// View the animated examples here: https://github.com/pterm/pterm#-examples
+// View the animated examples here: https://github.com/gozelle/pterm#-examples
 package pterm
 
 import (
@@ -13,10 +13,10 @@ import (
 var (
 	// Output completely disables output from pterm if set to false. Can be used in CLI application quiet mode.
 	Output = true
-
+	
 	// PrintDebugMessages sets if messages printed by the DebugPrinter should be printed.
 	PrintDebugMessages = false
-
+	
 	// RawOutput is set to true if pterm.DisableStyling() was called.
 	// The variable indicates that PTerm will not add additional styling to text.
 	// Use pterm.DisableStyling() or pterm.EnableStyling() to change this variable.

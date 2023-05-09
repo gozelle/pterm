@@ -5,9 +5,9 @@ import (
 	"os"
 	"testing"
 	"time"
-
+	
 	"github.com/MarvinJWendt/testza"
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func TestSpinnerPrinter_NilPrint(t *testing.T) {
@@ -63,10 +63,10 @@ func TestSpinnerPrinter_UpdateText(t *testing.T) {
 		p := pterm.DefaultSpinner
 		p.Start()
 		p.UpdateText("test")
-
+		
 		testza.AssertEqual(t, "test", p.Text)
 	})
-
+	
 	t.Run("Override", func(t *testing.T) {
 		out := captureStdout(func(io.Writer) {
 			// Set a really long delay to make sure text doesn't get updated before function returns.
@@ -83,7 +83,7 @@ func TestSpinnerPrinter_UpdateTextRawOutput(t *testing.T) {
 	p := pterm.DefaultSpinner
 	p.Start()
 	p.UpdateText("test")
-
+	
 	testza.AssertEqual(t, "test", p.Text)
 	p.Stop()
 	pterm.EnableStyling()
@@ -99,7 +99,7 @@ func TestSpinnerPrinter_Warning(t *testing.T) {
 func TestSpinnerPrinter_WithDelay(t *testing.T) {
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithDelay(time.Second)
-
+	
 	testza.AssertEqual(t, time.Second, p2.Delay)
 }
 
@@ -107,21 +107,21 @@ func TestSpinnerPrinter_WithMessageStyle(t *testing.T) {
 	s := pterm.NewStyle(pterm.FgRed, pterm.BgBlue, pterm.Bold)
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithMessageStyle(s)
-
+	
 	testza.AssertEqual(t, s, p2.MessageStyle)
 }
 
 func TestSpinnerPrinter_WithRemoveWhenDone(t *testing.T) {
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithRemoveWhenDone()
-
+	
 	testza.AssertTrue(t, p2.RemoveWhenDone)
 }
 
 func TestSpinnerPrinter_WithSequence(t *testing.T) {
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithSequence("a", "b", "c")
-
+	
 	testza.AssertEqual(t, []string{"a", "b", "c"}, p2.Sequence)
 }
 
@@ -129,21 +129,21 @@ func TestSpinnerPrinter_WithStyle(t *testing.T) {
 	s := pterm.NewStyle(pterm.FgRed, pterm.BgBlue, pterm.Bold)
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithStyle(s)
-
+	
 	testza.AssertEqual(t, s, p2.Style)
 }
 
 func TestSpinnerPrinter_WithText(t *testing.T) {
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithText("test")
-
+	
 	testza.AssertEqual(t, "test", p2.Text)
 }
 
 func TestSpinnerPrinter_WithShowTimer(t *testing.T) {
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithShowTimer()
-
+	
 	testza.AssertTrue(t, p2.ShowTimer)
 }
 
@@ -151,7 +151,7 @@ func TestSpinnerPrinter_WithTimerStyle(t *testing.T) {
 	s := pterm.NewStyle(pterm.FgRed, pterm.BgBlue, pterm.Bold)
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithTimerStyle(s)
-
+	
 	testza.AssertEqual(t, s, p2.TimerStyle)
 }
 
@@ -159,7 +159,7 @@ func TestSpinnerPrinter_WithTimerRoundingFactor(t *testing.T) {
 	s := time.Millisecond * 200
 	p := pterm.SpinnerPrinter{}
 	p2 := p.WithTimerRoundingFactor(s)
-
+	
 	testza.AssertEqual(t, s, p2.TimerRoundingFactor)
 }
 
@@ -224,7 +224,7 @@ func TestSpinnerPrinter_WithWriter(t *testing.T) {
 	p := pterm.SpinnerPrinter{}
 	s := os.Stderr
 	p2 := p.WithWriter(s)
-
+	
 	testza.AssertEqual(t, s, p2.Writer)
 	testza.AssertZero(t, p.Writer)
 }
@@ -249,7 +249,7 @@ func TestSpinnerPrinter_OutputToWriters(t *testing.T) {
 			expectOutputToContain: "Updated text",
 		},
 	}
-
+	
 	for testTitle, testCase := range testCases {
 		t.Run(testTitle, func(t *testing.T) {
 			stderr, err := testza.CaptureStderr(func(w io.Writer) error {
@@ -260,7 +260,7 @@ func TestSpinnerPrinter_OutputToWriters(t *testing.T) {
 				time.Sleep(time.Second) // Required otherwise the goroutine doesn't run and the text isnt updated
 				return nil
 			})
-
+			
 			testza.AssertNoError(t, err)
 			testza.AssertContains(t, stderr, "Hello world")
 			testza.AssertContains(t, stderr, testCase.expectOutputToContain)

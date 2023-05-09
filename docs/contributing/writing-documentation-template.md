@@ -10,7 +10,7 @@
     
     ![TemplatePrinter Example](https://raw.githubusercontent.com/pterm/pterm/master/_examples/template/animation.svg)
     
-    <p align="center"><a href="https://github.com/pterm/pterm/blob/master/_examples/template/main.go" target="_blank">(Show source of demo)</a></p>
+    <p align="center"><a href="https://github.com/gozelle/pterm/blob/master/_examples/template/main.go" target="_blank">(Show source of demo)</a></p>
     
     
     ## Usage
@@ -25,7 +25,7 @@
     
     |Function|Description|
     |--------|-----------|
-    |[FunctionName](https://pkg.go.dev/github.com/pterm/pterm#TemplatePrinter.FunctionName)|Description of function|
+    |[FunctionName](https://pkg.go.dev/github.com/gozelle/pterm#TemplatePrinter.FunctionName)|Description of function|
     
     ### Options
     
@@ -40,13 +40,13 @@
     
     |Option|Type|
     |------|----|
-    |[OptionName](https://pkg.go.dev/github.com/pterm/pterm#TemplatePrinter.OptionName)|[TypeName](https://pkg.go.dev/github.com/pterm/pterm#TypeName)|
+    |[OptionName](https://pkg.go.dev/github.com/gozelle/pterm#TemplatePrinter.OptionName)|[TypeName](https://pkg.go.dev/github.com/gozelle/pterm#TypeName)|
     
     ### Output functions
     <!-- Remove comment of the correct interface -->
     
     <!--
-    > This printer implements the interface [`TextPrinter`](https://github.com/pterm/pterm/blob/master/interface_text_printer.go)
+    > This printer implements the interface [`TextPrinter`](https://github.com/gozelle/pterm/blob/master/interface_text_printer.go)
     
     |Function|Description|
     |------|---------|
@@ -61,7 +61,7 @@
     -->
     
     <!--
-    > This printer implements the interface [`RenderablePrinter`](https://github.com/pterm/pterm/blob/master/interface_renderable_printer.go)
+    > This printer implements the interface [`RenderablePrinter`](https://github.com/gozelle/pterm/blob/master/interface_renderable_printer.go)
     
     |Function|Description|
     |------|---------|
@@ -70,7 +70,7 @@
     -->
     
     <!--
-    > This printer implements the interface [`LivePrinter`](https://github.com/pterm/pterm/blob/master/interface_live_printer.go)
+    > This printer implements the interface [`LivePrinter`](https://github.com/gozelle/pterm/blob/master/interface_live_printer.go)
     
     |Function|Description|
     |------|---------|

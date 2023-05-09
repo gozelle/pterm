@@ -7,8 +7,8 @@ import (
 	"os/exec"
 	"regexp"
 	"strings"
-
-	"github.com/pterm/pterm"
+	
+	"github.com/gozelle/pterm"
 )
 
 func do(title string, currentLevel int, f func(currentLevel int)) {
@@ -21,11 +21,11 @@ func writeBetween(name string, original string, insertText string) string {
 	afterRegex := regexp.MustCompile(`(?ms)<!-- ` + name + `:end -->.*`)
 	before := beforeRegex.FindAllString(original, 1)[0]
 	after := afterRegex.FindAllString(original, 1)[0]
-
+	
 	ret := before
 	ret += insertText
 	ret += after
-
+	
 	return ret
 }
 

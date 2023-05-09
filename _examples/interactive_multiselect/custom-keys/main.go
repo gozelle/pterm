@@ -2,18 +2,18 @@ package main
 
 import (
 	"fmt"
-
+	
 	"atomicgo.dev/keyboard/keys"
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
 	var options []string
-
+	
 	for i := 0; i < 5; i++ {
 		options = append(options, fmt.Sprintf("Option %d", i))
 	}
-
+	
 	printer := pterm.DefaultInteractiveMultiselect.WithOptions(options)
 	printer.Filter = false
 	printer.KeyConfirm = keys.Enter

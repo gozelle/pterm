@@ -3,12 +3,12 @@ package pterm
 import (
 	"io"
 	"strings"
-
+	
 	"github.com/gookit/color"
-
+	
 	"github.com/mattn/go-runewidth"
-
-	"github.com/pterm/pterm/internal"
+	
+	"github.com/gozelle/pterm/internal"
 )
 
 // Letters is a slice of Letter.
@@ -73,14 +73,14 @@ func (p BigTextPrinter) WithWriter(writer io.Writer) *BigTextPrinter {
 // Srender renders the BigText as a string.
 func (p BigTextPrinter) Srender() (string, error) {
 	var ret string
-
+	
 	if RawOutput {
 		for _, letter := range p.Letters {
 			ret += letter.String
 		}
 		return ret, nil
 	}
-
+	
 	var bigLetters Letters
 	for _, l := range p.Letters {
 		if val, ok := p.BigCharacters[l.String]; ok {
@@ -91,16 +91,16 @@ func (p BigTextPrinter) Srender() (string, error) {
 			})
 		}
 	}
-
+	
 	var maxHeight int
-
+	
 	for _, l := range bigLetters {
 		h := strings.Count(l.String, "\n")
 		if h > maxHeight {
 			maxHeight = h
 		}
 	}
-
+	
 	for i := 0; i <= maxHeight; i++ {
 		for _, letter := range bigLetters {
 			var letterLine string
@@ -113,7 +113,7 @@ func (p BigTextPrinter) Srender() (string, error) {
 			if letterLineLength < maxLetterWidth {
 				letterLine += strings.Repeat(" ", maxLetterWidth-letterLineLength)
 			}
-
+			
 			if letter.RGB != (RGB{}) && (color.IsSupportRGBColor() || internal.RunsInCi()) {
 				ret += letter.RGB.Sprint(letterLine)
 			} else {
@@ -122,7 +122,7 @@ func (p BigTextPrinter) Srender() (string, error) {
 		}
 		ret += "\n"
 	}
-
+	
 	return ret, nil
 }
 
@@ -130,7 +130,7 @@ func (p BigTextPrinter) Srender() (string, error) {
 func (p BigTextPrinter) Render() error {
 	s, _ := p.Srender()
 	Fprintln(p.Writer, s)
-
+	
 	return nil
 }
 

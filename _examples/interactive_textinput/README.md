@@ -10,7 +10,7 @@
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -35,7 +35,7 @@ func main() {
 package main
 
 import (
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -59,7 +59,7 @@ func main() {
 ```go
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	result, _ := pterm.DefaultInteractiveTextInput.WithMask("*").Show("Enter your password")

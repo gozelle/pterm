@@ -1,6 +1,6 @@
 package main
 
-import "github.com/pterm/pterm"
+import "github.com/gozelle/pterm"
 
 func main() {
 	for i := 0; i < 15; i++ {
@@ -12,7 +12,7 @@ func main() {
 			pterm.EnableOutput()
 			pterm.Info.Println("Enabled Output!")
 		}
-
+		
 		pterm.Printf("Printing something... [%d/%d]\n", i, 15)
 	}
 }

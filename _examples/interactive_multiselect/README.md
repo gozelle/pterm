@@ -14,7 +14,7 @@ import (
 
 	"atomicgo.dev/keyboard/keys"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -52,7 +52,7 @@ import (
 	"fmt"
 
 	"atomicgo.dev/keyboard/keys"
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {
@@ -88,7 +88,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {

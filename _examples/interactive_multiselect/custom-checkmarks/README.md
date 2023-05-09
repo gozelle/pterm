@@ -10,7 +10,7 @@ import (
 
 	"atomicgo.dev/keyboard/keys"
 
-	"github.com/pterm/pterm"
+	"github.com/gozelle/pterm"
 )
 
 func main() {

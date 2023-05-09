@@ -3,11 +3,11 @@ package pterm
 import (
 	"fmt"
 	"strings"
-
+	
 	"atomicgo.dev/cursor"
 	"atomicgo.dev/keyboard"
 	"atomicgo.dev/keyboard/keys"
-	"github.com/pterm/pterm/internal"
+	"github.com/gozelle/pterm/internal"
 )
 
 var (
@@ -97,16 +97,16 @@ func (p InteractiveConfirmPrinter) Show(text ...string) (bool, error) {
 	// and all the needed cleanup can be done before
 	cancel, exit := internal.NewCancelationSignal()
 	defer exit()
-
+	
 	var result bool
-
+	
 	if len(text) == 0 || text[0] == "" {
 		text = []string{p.DefaultText}
 	}
-
+	
 	p.TextStyle.Print(text[0] + " " + p.getSuffix() + ": ")
 	y, n := p.getShortHandles()
-
+	
 	var interrupted bool
 	err := keyboard.Listen(func(keyInfo keys.Key) (stop bool, err error) {
 		key := keyInfo.Code
@@ -114,7 +114,7 @@ func (p InteractiveConfirmPrinter) Show(text ...string) (bool, error) {
 		if err != nil {
 			return false, fmt.Errorf("failed to get key: %w", err)
 		}
-
+		
 		switch key {
 		case keys.RuneKey:
 			switch char {
@@ -155,7 +155,7 @@ func (p InteractiveConfirmPrinter) Show(text ...string) (bool, error) {
 func (p InteractiveConfirmPrinter) getShortHandles() (string, string) {
 	y := strings.ToLower(string([]rune(p.ConfirmText)[0]))
 	n := strings.ToLower(string([]rune(p.RejectText)[0]))
-
+	
 	return y, n
 }
 
@@ -167,6 +167,6 @@ func (p InteractiveConfirmPrinter) getSuffix() string {
 	} else {
 		n = strings.ToUpper(n)
 	}
-
+	
 	return p.SuffixStyle.Sprintf("[%s/%s]", y, n)
 }
